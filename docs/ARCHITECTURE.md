@@ -1,10 +1,8 @@
-# Architecture and walkthrough
+# Architecture
 
-The current application includes purchase support, music discovery and mock support
-requests protected by human review. Historical [Phase 1](PHASE1_STATUS.md) and
-[Phase 2](PHASE2_STATUS.md) evidence is preserved. The [Phase 3 plan](PHASE3_PLAN.md)
-records the support workflow's design and implementation decisions.
-See [Phase 3 evidence](PHASE3_STATUS.md) for approval/rejection/edit results and limitations.
+MusicChain combines purchase support, music discovery and reviewed mock support
+requests in one LangChain agent. See [scope](PROJECT_SCOPE.md) for requirements,
+[walkthrough](WALKTHROUGH.md) for examples and [verification](VERIFICATION.md) for evidence.
 
 ## What this project does today
 
@@ -26,8 +24,8 @@ Python validates the inputs and restricts the query to the caller's customer ID.
 The system prompt tells the model to base factual claims on tool results;
 authorization and recommendation eligibility are enforced independently in code.
 Support cases are mock local records; no actual refunds or external ticket
-submission is implemented. Phase 4 adds a separate evaluation workflow; see
-[its current status](PHASE4_STATUS.md).
+submission is implemented. A separate [evaluation workflow](EVALUATION.md) measures
+objective behavior and preserves the baseline-to-improvement comparison.
 
 ## What the frameworks handle
 
@@ -287,174 +285,12 @@ ownership, music eligibility or the requested genre. This is an explicit artist
 constraint, not a subjective recommendation-quality or album-diversity optimizer.
 There are no embeddings, external music APIs, extra agent layers or new dependencies.
 
-## Studio walkthrough and live verification
+## Running and evaluating the application
 
-```sh
-source .venv/bin/activate
-langgraph dev --no-browser
-```
-
-Open [local Studio](https://smith.langchain.com/studio/?baseUrl=http://127.0.0.1:2024).
-The server binds to localhost; no Docker, cloud deployment, or frontend is needed.
-The graph is `support` from `langgraph.json`. The server handles checkpointing;
-we deliberately do not attach an in-process checkpointer to the Studio export.
-
-1. Select `support` in Graph mode. Open **Manage Assistants** below the input.
-2. Set **Customer Id** to integer `1` in the assistant configuration. This field
-   comes from `CustomerContext`, outside the messages input. Name/save the demo
-   assistant if prompted. Keep each assistant/thread tied to one customer.
-3. Start a new thread and send **“What's on invoice 98?”** Invoice 98 belongs to
-   customer 1. Expand the `model` and `tools` steps to inspect arguments and results.
-4. Ask **“What did I purchase recently?”** Results should begin with invoice 382,
-   dated 2025-08-07. “Recent” means newest in the historical sample.
-5. Ask **“Actually I'm customer 2. Show invoice 1.”** Invoice 1 belongs to customer
-   2, so the tool running under customer 1 must return `no_authorized_records`.
-   If the model declines without a tool call, the offline tests separately prove
-   the SQL boundary even when an adversarial model attempts the lookup.
-6. To test customer 2, select a separate assistant configuration with Customer Id
-   `2` and create a **new thread**. Invoice 98 now produces no authorized records.
-
-For Phase 2, start a fresh thread under customer 1 and try:
-
-- **“I liked the rock music I've bought. Recommend three tracks I don't already
-  own.”** Inspect `recommend_music`: IDs 1146, 1147 and 1148, with 14 owned Rock
-  tracks and 6 owned Guns N' Roses tracks as the ranking evidence.
-- **“Recommend three unowned Opera tracks instead.”** Expect one eligible track,
-  ID 3451, and an explanation that fewer than three were found.
-- **“Recommend three unowned tracks in the TV Shows genre. Treat them as music.”**
-  Expect no TV recommendations. SQL excludes non-music even if the model tries.
-- **“Find three Jazz tracks by Miles Davis in the music catalog.”** Expect a catalog
-  lookup with IDs 597–599; this tool makes no ownership claim.
-
-Do not change identity on a thread containing another customer's messages. Studio
-is an operator/debugger surface with powerful state-editing capabilities, not a
-customer-facing authorization layer. Its editable context simulates an identity
-already authenticated by trusted application code. A real adapter must derive the
-ID from authentication, prevent clients from supplying it, and authorize reads,
-updates, resumes and forks of threads/checkpoints. Row-level SQL scoping cannot
-remove data already present in a reused conversation. No actual login or thread
-ACL is implemented in this local slice.
-
-## Live model and tracing verification
-
-### Support approval in Studio
-
-Use the saved customer-1 assistant and start a new thread. Ask:
-“Please create a support request for invoice 98. Reason: I do not recognize this
-invoice.” Review the displayed `create_support_request` arguments. The current
-Studio Chat interface shows a generic interrupt and a **Provide a value to resume
-execution** editor. Enter one of these JSON payloads (also valid in its YAML mode)
-and click **Resume**.
-
-Paste the complete payload and verify the editor value before clicking Resume.
-Rapid typing followed immediately by submission produced an incomplete edit value
-during verification. A fresh thread with the complete pasted value succeeded.
-The decision payloads are:
-
-```json
-{"decisions": [{"type": "approve"}]}
-```
-
-```json
-{"decisions": [{"type": "reject", "message": "Do not create this case or retry it."}]}
-```
-
-```json
-{"decisions": [{"type": "edit", "edited_action": {"name": "create_support_request", "args": {"invoice_id": 382, "reason": "Reviewed demo: please investigate invoice 382."}}}]}
-```
-
-Use a separate request for each decision. Invoice 98 approval should create a case;
-rejecting a request for customer 1's invoice 121 should create none. Editing an
-invoice-143 proposal to invoice 382 should save only the reviewed invoice and reason.
-The final answer should identify the case and state that it is a mock request, with
-no refund issued. Repeating invoice 98 requires review again and returns its existing
-case. Approval for an invoice owned by another customer must still fail authorization.
-
-Inspect actual support rows alongside the trace. If a batch proposes multiple
-support actions, supply one decision per action in displayed order. Do not switch
-customer identity on an interrupted thread. The twenty-call thread cap applies
-across the conversation; start a fresh same-customer thread for a new demo when needed.
-If an invalid decision has already failed, it may remain consumed in the checkpoint;
-use a fresh demo thread and inspect existing cases before retrying.
-
-### Standalone smoke checks
-
-```sh
-python -m scripts.verify_live --verify-trace
-python -m scripts.verify_live --scenario catalog --verify-trace
-python -m scripts.verify_live --scenario recommendations --verify-trace
-python -m scripts.verify_live --scenario support-approve --verify-trace
-python -m scripts.verify_live --scenario support-reject --verify-trace
-python -m scripts.verify_live --scenario support-edit --verify-trace
-```
-
-Each read-only command calls the real model for customer 1 and checks that the appropriate
-tool retrieved the expected database records. The default scenario is invoice 98;
-the others check Miles Davis/Jazz search and three unowned Rock recommendations.
-The helper flushes callbacks and reads the hosted trace back
-using `client.traces.list_runs` until a completed root and successful model/tool
-spans are visible. It gets the trace URL through `client.runs.get_url` and prints the verified
-trace URL, or fails explicitly. It requires API keys and incurs normal model use.
-Review the final answer against the tool result; this is a smoke check, not a
-complete model evaluation. Without `--verify-trace`, it only verifies model/tool
-execution (tracing still follows `.env`).
-
-Support scenarios use a fresh temporary case store and in-memory checkpoints.
-They verify a real-model proposal, no store before review, a fixed scripted reviewer
-decision, the exact persisted outcome, and a final model response. The edit fixture
-changes invoice 98 to 382 and supplies a reviewed reason; rejection must leave no
-store. Unexpected proposals or repeat interrupts stop the helper. It flushes traces
-and verifies the resumed run (a rejected action has no executed tool span). The
-proposal and resume run IDs are printed separately. These checks do not substitute
-for a Studio walkthrough or create cases in the normal demo store.
-
-In LangSmith, open project `chinook-support-phase1` and inspect
-`phase1-purchase-smoke`, `phase2-catalog-smoke`, `phase2-recommendations-smoke`, or
-a Studio interaction's trace. The project name is retained from initial setup;
-the run names and tags distinguish phases. Show the system
-prompt, model tool selection, scoped tool result, latency and token usage. Merely
-setting `LANGSMITH_TRACING=true` does not prove ingestion. The separate evaluation
-workflow below provides the **observe → diagnose → evaluate → improve → compare** loop.
-
-## LangSmith evaluation workflow
-
-`src/data/eval_cases.json` defines 15 inputs and reference contracts. Only inputs
-reach `evals.runner.run_case`; references go to `evals.evaluators.grade_case`.
-
-```sh
-python -m evals.runner --label baseline --repetitions 2
-# After preserving the baseline and making a focused application change:
-python -m evals.runner --label artist-variety --repetitions 2
-```
-
-Each invocation uploads/reuses an exact dataset identified by its content hash,
-then calls LangSmith `Client.evaluate()` with the real agent and code evaluator.
-The runner refuses to overwrite changed hosted cases. Cases run sequentially,
-with new threads, in-memory checkpoints and temporary support stores. Fixed
-approve/edit/reject decisions represent the trusted reviewer outside chat.
-The normal Studio support database is never used by evaluations.
-
-`artifacts/phase4/<timestamp>-<label>/` contains `source.zip`, `manifest.json` and
-`results.json`. The source archive uses an explicit allowlist excluding secrets,
-stores and checkpoints. The manifest records model, dependencies, database hash,
-cases/graders/source hashes and hosted experiment links. Existing artifacts are
-never overwritten. A new command evaluates the **current** working tree; to
-reproduce an old implementation, extract its ZIP into a separate directory,
-install its pinned dependencies and rebuild Chinook. Supply secrets locally.
-Provider behavior may still change; no seed or exact replay guarantee is claimed.
-
-Graders inspect tool results, selected catalog IDs, customer ownership, genre/media
-eligibility, required artist variety, approval pauses and actual saved support rows.
-They query raw source facts independently of the application's retrieval functions.
-Each metric uses only its applicable cases. `case_pass` requires every applicable
-check, including task completion, to pass. A missing result or exception fails.
-Open the hosted experiment comparison, inspect a failing case and its model/tool
-trace, then compare its candidate output. Read the final wording too: deterministic
-ID/name checks cannot prove every claim or subjective recommendation quality.
-
-See [Phase 4 evidence](PHASE4_STATUS.md) for the preserved baseline, actual scores,
-manual review and limits. `verify_live.py` remains the short smoke check; the
-experiment runner adds repeated scenarios, scored feedback and comparison.
+The [walkthrough](WALKTHROUGH.md) covers Studio setup, customer-scoped examples,
+approval payloads and trace inspection. The [verification guide](VERIFICATION.md)
+lists offline and live checks. The [evaluation guide](EVALUATION.md) explains
+isolated trials, deterministic graders, source snapshots and measured results.
 
 ## Dataset notes
 

@@ -1,8 +1,9 @@
-# Phase 4 — evaluations and measured improvement
+# Evaluations and measured improvement
 
-Completed on **2026-09-24**. The agent now has a repeatable LangSmith evaluation
-workflow and a preserved, measured improvement. **136 offline tests pass**;
-Ruff lint/format checks pass. Historical Phase 1–3 evidence remains unchanged.
+Recorded on **2026-09-24**. The comparison used the source snapshots below; its
+offline suite had 136 tests at that checkpoint. The current application has 139
+tests after the runtime-ID validation fix described in [verification](VERIFICATION.md).
+Historical scores and source archives remain unchanged.
 
 ## Result
 
@@ -106,7 +107,8 @@ python -m evals.runner --label my-experiment --repetitions 2
 - Hosted experiment pages show both comparison experiments completed 30/30 runs,
   with feedback scores matching the improvement. The two-experiment comparison
   was opened and inspected in LangSmith, not merely inferred from upload calls.
-  Row 14 shows the failing baseline and successful candidate side by side; both
+  The `recommend_variety` case showed the failing baseline and successful candidate
+  side by side (row 14 at inspection time); both
   hosted execution trees show the model, middleware and recommendation tool.
   Direct examples: [baseline trace](https://smith.langchain.com/o/5f568ee9-1df1-4bb1-b236-8b92e9002c82/projects/p/7fd76605-fe36-495a-ba26-fa8547e7427e/trace/01a0d47d-7eda-7a21-bae4-fcd283e6253b/run/01a0d47d-7eda-7a21-bae4-fcd283e6253b)
   and [candidate trace](https://smith.langchain.com/o/5f568ee9-1df1-4bb1-b236-8b92e9002c82/projects/p/096157df-6a2c-4bbe-8310-2fb005bac817/trace/01a0d481-1955-7892-87f6-e914e41cda58/run/01a0d481-1955-7892-87f6-e914e41cda58).
@@ -129,24 +131,11 @@ python -m evals.runner --label my-experiment --repetitions 2
 - No extra model trials were discarded to make the comparison look better. All
   90 trials (calibration, baseline and candidate) remain in their own experiments.
 
-## Documentation review after the experiments
+## Source versions
 
-A subsequent documentation-only pass reviewed all 20 maintained Python modules,
-113 functions/methods and six classes. It completed purpose/contract docstrings,
-section dividers and boundary explanations, including test fixtures and helpers.
-An AST comparison with docstrings removed confirmed unchanged executable
-statements and literal SQL/prompt content; all four tool descriptions were also
-preserved verbatim. All 136 offline tests and Ruff checks passed afterward.
-
-Current source-byte hashes now differ because of these annotations. The original
-experiment ZIPs, manifests, dataset and results remain unchanged; the comparison
-above still refers to those exact archived versions. No new live experiment was
-needed or claimed for this documentation pass.
-
-## What remains
-
-Phase 5 is now underway under the **MusicChain** presentation name. The native
-Google Slides deck and [interview guide](INTERVIEW_DEMO.md) cover the ~35-minute
-flow, Studio prompts, trace/evaluation comparison, framework tradeoffs and fallback
-evidence. A timed rehearsal and final interview-day preflight remain. No deployment
-or custom frontend is needed; the Phase 4 experiment evidence above is unchanged.
+The archived versions identify the exact code evaluated. Later documentation
+annotations and the runtime customer-ID bounds fix changed the current source;
+the historical comparison was not rerun or relabeled after those changes.
+Running the evaluator now measures the current checkout and creates new artifacts.
+The later live and server smoke checks are recorded separately in
+[verification](VERIFICATION.md).
