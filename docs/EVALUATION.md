@@ -82,7 +82,7 @@ accurate names. It remains preserved, but its 25/30 result is **not** the improv
 baseline. The grader now normalizes typographic quotes and whitespace while still
 rejecting altered names. After adding a regression test, the unchanged application
 was run again. Only then was artist variety implemented. This separates evaluator
-calibration from an application improvement; see [friction log](../FRICTION_LOG.md).
+calibration from an application improvement; see [friction log](FRICTION_LOG.md).
 
 The two comparison manifests have matching:
 

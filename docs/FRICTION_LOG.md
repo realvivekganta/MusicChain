@@ -1,7 +1,7 @@
 # Engineering friction log
 
 Observed during implementation and verification on 2026-09-23 and 2026-09-24.
-See [verification](docs/VERIFICATION.md) and [evaluation](docs/EVALUATION.md) for evidence.
+See [verification](VERIFICATION.md) and [evaluation](EVALUATION.md) for evidence.
 
 ## Runtime identity bounds
 
@@ -58,7 +58,7 @@ real model execution and account access were subsequently verified successfully.
   custom middleware or dependency upgrade was necessary.
 - Simple genre/artist frequency ranking gives customer 1 three Guns N' Roses
   tracks from the same album. This baseline was preserved for the measured
-  artist-variety improvement recorded in [evaluation](docs/EVALUATION.md).
+  artist-variety improvement recorded in [evaluation](EVALUATION.md).
 - The expanded prompt distinguishes video episodes from music. The live purchase
   regression correctly called invoice 98's items video episodes. This one observed
   improvement is not a measured model-quality claim.

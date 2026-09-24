@@ -1,8 +1,12 @@
-# MusicChain
+# MusicChain — Customer Support Agent
 
-A Python customer-support agent for a fictional digital music store, built with
-LangChain `create_agent()`, LangGraph and LangSmith. MusicChain uses the pinned
-Chinook sample dataset and runs locally through LangSmith Studio.
+MusicChain is a customer-support agent for a fictional music store. Built in Python
+with LangChain, LangGraph and LangSmith, it demonstrates how the LangChain ecosystem
+supports production-oriented agent development: scoped data access, controlled
+actions, observable execution and evaluation-driven improvement.
+
+The store's purchases and catalog come from the pinned Chinook sample dataset.
+MusicChain runs locally through LangSmith Studio.
 
 One agent supports three workflows:
 
@@ -15,6 +19,20 @@ One agent supports three workflows:
 
 Python owns input validation, SQL and authorization. Chinook stays read-only.
 Support cases are local records; no refunds or external tickets are issued.
+
+## How LangChain supports the agent
+
+- **LangChain** supplies the model/tool loop, runtime context, tool-call limits and
+  human-review middleware, so application code focuses on store-specific behavior.
+- **LangGraph** executes the agent and supports checkpointed conversations that
+  pause for review and resume through the local Agent Server.
+- **LangSmith** provides Studio, model/tool traces and evaluation experiments to
+  inspect failures and compare measured improvements.
+
+These are production-oriented engineering patterns demonstrated in a local
+application. Real customer/reviewer authentication and deployment are outside
+this implementation's scope. See [architecture](docs/ARCHITECTURE.md) for the
+framework responsibilities and application-owned boundaries.
 
 ## Quickstart
 
@@ -71,7 +89,7 @@ src/
     evaluators.py          Deterministic checks against data and execution evidence
   data/                    SQL source, provenance, license and evaluation cases
 tests/                     Offline data-boundary and graph-runtime tests
-docs/                      Scope, architecture, walkthrough and verification
+docs/                      Architecture, walkthrough, verification and engineering notes
 artifacts/                 Preserved evaluation and audit evidence
 ```
 
@@ -118,10 +136,9 @@ editable checkout, not a standalone application wheel.
 
 | Document | Purpose |
 | --- | --- |
-| [Project scope](docs/PROJECT_SCOPE.md) | Requirements and intentional boundaries |
-| [Architecture](docs/ARCHITECTURE.md) | Component ownership, request flow and security model |
+| [Architecture](docs/ARCHITECTURE.md) | Scope, framework responsibilities, request flow and security model |
 | [Walkthrough](docs/WALKTHROUGH.md) | Runnable examples and expected outcomes |
 | [Verification](docs/VERIFICATION.md) | Offline, live and historical evidence; known limits |
 | [Evaluation](docs/EVALUATION.md) | Baseline, measured improvement, graders and reproducibility |
-| [Friction log](FRICTION_LOG.md) | Observed engineering problems and resolutions |
+| [Friction log](docs/FRICTION_LOG.md) | Observed engineering problems and resolutions |
 | [Contributor instructions](AGENTS.md) | Implementation and documentation conventions |

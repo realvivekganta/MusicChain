@@ -1,7 +1,9 @@
 # MusicChain contributor instructions
 
-Read [project scope](docs/PROJECT_SCOPE.md) and [architecture](docs/ARCHITECTURE.md)
-before changing behavior. Keep the application small and its boundaries explicit.
+MusicChain is the customer-support agent for a fictional music store. It demonstrates
+production-oriented agent development using LangChain, LangGraph and LangSmith.
+Read [architecture and scope](docs/ARCHITECTURE.md) before changing behavior.
+Keep the application small and its boundaries explicit.
 
 ## Architecture and scope
 
@@ -52,7 +54,7 @@ before changing behavior. Keep the application small and its boundaries explicit
   experiment ZIPs, manifests, results, source hashes and original counts.
 - Keep README a short entry point. Put component details in architecture,
   runnable examples in the walkthrough and results in verification/evaluation.
-- Record actual technical friction in `FRICTION_LOG.md`. Keep personal planning,
+- Record actual technical friction in `docs/FRICTION_LOG.md`. Keep personal planning,
   presentation scheduling and session history outside the shared repository.
 - Update documentation when behavior changes. Distinguish historical checks from
   current capabilities and small regression suites from reliability estimates.

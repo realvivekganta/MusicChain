@@ -1,16 +1,20 @@
-# Architecture
+# Architecture and scope
 
-MusicChain combines purchase support, music discovery and reviewed mock support
-requests in one LangChain agent. See [scope](PROJECT_SCOPE.md) for requirements,
-[walkthrough](WALKTHROUGH.md) for examples and [verification](VERIFICATION.md) for evidence.
+MusicChain is a customer-support agent for a fictional music store using the
+Chinook sample dataset. It demonstrates how LangChain, LangGraph and LangSmith
+support production-oriented agent development through data isolation, human review,
+checkpointed execution, tracing and measured improvement.
 
-## What this project does today
+See the [walkthrough](WALKTHROUGH.md) for runnable examples,
+[verification](VERIFICATION.md) for checks and [evaluations](EVALUATION.md) for the
+preserved baseline-to-improvement comparison.
 
-This is a Python support agent for MusicChain, a fictional digital media store
-using the Chinook sample dataset. A
-customer can ask about recent purchases, a particular invoice, or purchased
+## Customer workflows
+
+A customer can ask about recent purchases, a particular invoice, or purchased
 tracks matching an artist, album or track name. They can also search the music
-catalog and request unowned recommendations grounded in their purchase history.
+catalog, request unowned recommendations grounded in purchase history, and propose
+a support request for human review.
 
 | Tool | Purpose | Ownership behavior |
 | --- | --- | --- |
@@ -26,6 +30,30 @@ authorization and recommendation eligibility are enforced independently in code.
 Support cases are mock local records; no actual refunds or external ticket
 submission is implemented. A separate [evaluation workflow](EVALUATION.md) measures
 objective behavior and preserves the baseline-to-improvement comparison.
+
+## Scope and production boundaries
+
+The application demonstrates production-oriented controls in a local environment.
+Its requirements are scoped data access, grounded answers, bounded tool use,
+human-reviewed writes, reproducible data and inspectable verification evidence.
+Model-selected arguments never establish identity or permission. All sensitive
+queries use trusted runtime context; review cannot override invoice ownership.
+
+Studio is a trusted operator interface with simulated identity. Real customer and
+reviewer authentication, thread/checkpoint access controls, external ticketing,
+refund execution and deployment infrastructure are outside this implementation.
+Separate customer threads are required: SQL scoping cannot protect another
+customer's messages already present in a reused conversation.
+
+One agent and four explicit tools cover the bounded workflows. Generic text-to-SQL,
+RAG, shell/filesystem access, subagent delegation and a custom frontend are outside
+scope. Deep Agents would suit open-ended planning and context management; these
+workflows do not require those capabilities.
+
+Production adoption would require an authenticated application adapter, reviewer
+authorization, external action policy/integrations, broader evaluations and explicit
+trace retention/redaction controls. The documented local checks and small regression
+suite do not establish production reliability or compliance readiness.
 
 ## What the frameworks handle
 
@@ -74,12 +102,11 @@ callers construct a validated `PurchaseQuery` without involving LangChain.
 Trusted identity and model-selected filters share this module because both define
 inputs used across the application. Clearly labeled sections preserve the
 distinction between their sources without requiring another small file.
-The module is named `context.py` by project convention and contains both runtime
-context and tool-input validation; it does not assemble a prompt or fetch data.
-For example, the caller supplies `CustomerContext(customer_id=1)` while the model
-may supply `invoice_id=98`. `PurchaseQuery` has no customer-ID field. Calling this
-file `guardrails.py` would obscure its specific purpose: safeguards also live in
-the context validator, agent middleware and database query.
+`context.py` defines runtime context and tool-input validation; it does not assemble
+a prompt or fetch data. For example, the caller supplies
+`CustomerContext(customer_id=1)` while the model may supply `invoice_id=98`.
+`PurchaseQuery` has no customer-ID field. Safeguards also live in the context
+validator, agent middleware and database queries.
 Runtime customer IDs must be actual integers in SQLite's positive signed-64-bit
 range; oversized values are rejected before the model or database runs. This
 validates the identity's shape, not the caller's authentication.
@@ -88,9 +115,8 @@ validates the identity's shape, not the caller's authentication.
 `build_database.py` prepares the dataset and is reused by test fixtures;
 `verify_live.py` exercises the real provider and optionally verifies a hosted
 trace. `src/data/` contains the vendored SQL, provenance/checksum, license and
-generated SQLite database. It is data, not Python source; grouping it under
-`src/` is this repository's organizational choice. The current setup targets
-running from an editable checkout, not distributing a standalone application wheel.
+generated SQLite database. The setup targets an editable checkout; database paths
+are resolved from that checkout rather than packaged into a standalone wheel.
 
 The flat package is intentional: there is one agent and four business tools today.
 Separate folders for tools or persistence can be introduced when they contain

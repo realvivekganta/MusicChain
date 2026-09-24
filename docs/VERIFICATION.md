@@ -314,4 +314,4 @@ pasting/verifying the complete value before clicking Resume succeeded; the recor
 server command contained the full edited action. Rapid typing/submission also
 produced one empty-message diagnostic run. This is an observed UI-entry timing
 issue, not an authorization bypass; the precise frontend cause was not established.
-See [friction log](../FRICTION_LOG.md).
+See [friction log](FRICTION_LOG.md).
