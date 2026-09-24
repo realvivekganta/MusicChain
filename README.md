@@ -89,12 +89,17 @@ from the project root after the editable install; Python imports remain `agent`
 
 ## Setup
 
+Repository: [realvivekganta/MusicChain](https://github.com/realvivekganta/MusicChain) (private).
+
 Clone the repository and enter the workspace:
 
 ```sh
 git clone https://github.com/realvivekganta/MusicChain.git
 cd MusicChain
 ```
+
+A fresh GitHub clone, clean environment, database build and all 139 offline tests
+were verified on macOS/Python 3.12 on 2026-09-24. Tests require no API keys.
 
 From the repository root, using Python 3.12 (verified; package supports 3.11–3.13):
 

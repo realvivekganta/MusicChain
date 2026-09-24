@@ -6,6 +6,10 @@ Story: prototype → observable, testable, controlled, production-minded agent.
 The workspace and GitHub repository are named `MusicChain`. The Python distribution
 remains `chinook-support`, its import package is `agent`, and the Studio graph is
 `support`. Historical experiment names and evidence remain unchanged.
+Repository: https://github.com/realvivekganta/MusicChain (private, branch `main`).
+The workspace rename, GitHub push and fresh-clone installation/database build were
+verified on 2026-09-24; 139 tests and Ruff passed in the clean environment. The local
+Studio server was restarted from MusicChain and a real purchase request passed.
 
 ## Scope and architecture
 

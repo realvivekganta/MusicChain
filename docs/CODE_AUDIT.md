@@ -135,7 +135,28 @@ documentation.
 - Supported setup is an editable local checkout on the verified Python/macOS
   environment. A clean GitHub-clone installation on another machine/platform has
   not yet been tested. The current data-path design is not a standalone wheel.
-- Next tasks: workspace rename and GitHub preparation; deck framing after discovery
+- Next tasks at the audit checkpoint: workspace rename and GitHub preparation; deck framing after discovery
   with Robert/Haitham roles; update deck test counts; timed browser/demo rehearsal.
   Recreate or repair the virtual environment/editable installation after the folder
   rename because their absolute paths can reference the old location.
+
+
+## Repository publication follow-up — 2026-09-24
+
+The workspace was renamed to `MusicChain` and published to the private
+[realvivekganta/MusicChain repository](https://github.com/realvivekganta/MusicChain),
+with `main` as its default branch. Local secrets, generated databases, caches and
+conversation checkpoints are ignored. The pinned SQL and experiment source ZIPs
+remain included as reproducibility evidence. Git attributes preserve the SQL bytes
+so line-ending conversion cannot invalidate its checksum.
+
+After the rename, generated virtual-environment paths were repaired and the editable
+package reinstalled. All 139 tests, lint/format and dependency checks passed. The
+local Agent Server restarted at port 2024 and completed a real invoice-98 request.
+
+An independent fresh clone from GitHub was then installed into a new, credential-free
+Python 3.12 environment on the same Mac. Installation from `requirements.lock`, editable
+project installation, the pinned database build, all 139 tests, Ruff lint/format and
+`pip check` passed. No `.env`, SQLite stores or checkpoints arrived in the clone.
+Other platforms remain unverified. These checks complete workspace/repository setup;
+the remaining interview tasks are deck framing/roles and rehearsal.
