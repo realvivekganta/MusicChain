@@ -1,12 +1,12 @@
-# MusicChain — Customer Support Agent
+# MusicChain — MusicMuse Customer Support Agent
 
-MusicChain is a customer-support agent for a fictional music store. Built in Python
-with LangChain, LangGraph and LangSmith, it demonstrates how the LangChain ecosystem
+MusicMuse is the customer-support agent for **MusicChain**, a fictional music store.
+Built in Python with LangChain, LangGraph and LangSmith, it demonstrates how the LangChain ecosystem
 supports production-oriented agent development: scoped data access, controlled
 actions, observable execution and evaluation-driven improvement.
 
 The store's purchases and catalog come from the pinned Chinook sample dataset.
-MusicChain runs locally through LangSmith Studio.
+MusicMuse runs locally through LangSmith Studio.
 
 One agent supports three workflows:
 

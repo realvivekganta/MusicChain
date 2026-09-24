@@ -1,7 +1,8 @@
 # MusicChain contributor instructions
 
-MusicChain is the customer-support agent for a fictional music store. It demonstrates
-production-oriented agent development using LangChain, LangGraph and LangSmith.
+MusicChain is the fictional music store; MusicMuse is its customer-support agent.
+The project demonstrates production-oriented agent development using LangChain,
+LangGraph and LangSmith.
 Read [architecture and scope](docs/ARCHITECTURE.md) before changing behavior.
 Keep the application small and its boundaries explicit.
 

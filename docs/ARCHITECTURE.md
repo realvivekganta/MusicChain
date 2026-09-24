@@ -1,7 +1,7 @@
 # Architecture and scope
 
-MusicChain is a customer-support agent for a fictional music store using the
-Chinook sample dataset. It demonstrates how LangChain, LangGraph and LangSmith
+MusicMuse is the customer-support agent for MusicChain, a fictional music store
+using the Chinook sample dataset. It demonstrates how LangChain, LangGraph and LangSmith
 support production-oriented agent development through data isolation, human review,
 checkpointed execution, tracing and measured improvement.
 
