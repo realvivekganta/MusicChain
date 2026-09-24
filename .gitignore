@@ -1,0 +1,25 @@
+# Local secrets, generated files and runtime state excluded from version control.
+
+# --- Secrets: keep only the empty configuration template -----------------------
+.env
+.env.*
+!.env.example
+
+# --- Python environment, bytecode and development caches ----------------------
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+build/
+dist/
+.DS_Store
+
+# --- Local conversation checkpoints and generated databases -------------------
+.langgraph_api/
+src/data/*.sqlite*
+src/data/*.db*
+
+# --- Runtime logs ------------------------------------------------------------
+*.log

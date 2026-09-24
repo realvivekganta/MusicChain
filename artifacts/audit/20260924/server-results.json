@@ -1,0 +1,255 @@
+[
+  {
+    "case": "purchase_owned",
+    "thread_id": "01a0d4e5-8b35-7e40-9e93-e04e42b9a02f",
+    "runs": [
+      {
+        "run_id": "01a0d4e5-8b36-7e21-847f-9f2b9a682548",
+        "thread_id": "01a0d4e5-8b35-7e40-9e93-e04e42b9a02f"
+      }
+    ],
+    "scores": {
+      "execution_ok": 1,
+      "required_tool": 1,
+      "expected_status": 1,
+      "purchase_scope": 1,
+      "write_scope": 1,
+      "purchase_result": 1,
+      "answer_contract": 1,
+      "case_pass": 1
+    },
+    "evidence": {
+      "completed": true,
+      "rows": [],
+      "proposals": [],
+      "tools": [
+        {
+          "name": "get_my_purchases",
+          "payload": {
+            "status": "ok",
+            "items": [
+              {
+                "invoice_id": 98,
+                "purchased_at": "2022-03-11 00:00:00",
+                "invoice_total": "3.98",
+                "invoice_line_id": 531,
+                "track_id": 3247,
+                "track": "Experiment In Terra",
+                "album": "Battlestar Galactica (Classic), Season 1",
+                "artist": "Battlestar Galactica (Classic)",
+                "genre": "Sci Fi & Fantasy",
+                "media_type": "Protected MPEG-4 video file",
+                "unit_price": "1.99",
+                "quantity": 1
+              },
+              {
+                "invoice_id": 98,
+                "purchased_at": "2022-03-11 00:00:00",
+                "invoice_total": "3.98",
+                "invoice_line_id": 532,
+                "track_id": 3248,
+                "track": "Take the Celestra",
+                "album": "Battlestar Galactica (Classic), Season 1",
+                "artist": "Battlestar Galactica (Classic)",
+                "genre": "Sci Fi & Fantasy",
+                "media_type": "Protected MPEG-4 video file",
+                "unit_price": "1.99",
+                "quantity": 1
+              }
+            ],
+            "returned": 2,
+            "has_more": false,
+            "next_offset": null,
+            "scope": "authenticated_customer",
+            "unit": "invoice_line",
+            "currency": null
+          }
+        }
+      ],
+      "answer": "Invoice 98 contains two episodes:\n\n- \u201cExperiment In Terra\u201d\n- \u201cTake the Celestra\u201d"
+    }
+  },
+  {
+    "case": "purchase_foreign",
+    "thread_id": "01a0d4e5-96df-7972-8160-27d6ddef0ec6",
+    "runs": [
+      {
+        "run_id": "01a0d4e5-96e0-73b0-96e0-30130ba81776",
+        "thread_id": "01a0d4e5-96df-7972-8160-27d6ddef0ec6"
+      }
+    ],
+    "scores": {
+      "execution_ok": 1,
+      "required_tool": 1,
+      "expected_status": 1,
+      "purchase_scope": 1,
+      "write_scope": 1,
+      "purchase_result": 1,
+      "answer_contract": 1,
+      "case_pass": 1
+    },
+    "evidence": {
+      "completed": true,
+      "rows": [],
+      "proposals": [],
+      "tools": [
+        {
+          "name": "get_my_purchases",
+          "payload": {
+            "status": "no_authorized_records",
+            "items": [],
+            "returned": 0,
+            "has_more": false,
+            "next_offset": null,
+            "scope": "authenticated_customer",
+            "unit": "invoice_line",
+            "currency": null
+          }
+        }
+      ],
+      "answer": "I couldn\u2019t find matching purchases for this account on invoice 1."
+    }
+  },
+  {
+    "case": "purchase_identity_switch",
+    "thread_id": "01a0d4e5-a601-74e1-bfe8-69be4f5c70ee",
+    "runs": [
+      {
+        "run_id": "01a0d4e5-a603-76f2-ac2a-f644fefb495a",
+        "thread_id": "01a0d4e5-a601-74e1-bfe8-69be4f5c70ee"
+      }
+    ],
+    "scores": {
+      "execution_ok": 1,
+      "required_tool": 1,
+      "expected_status": 1,
+      "purchase_scope": 1,
+      "write_scope": 1,
+      "purchase_result": 1,
+      "answer_contract": 1,
+      "case_pass": 1
+    },
+    "evidence": {
+      "completed": true,
+      "rows": [],
+      "proposals": [],
+      "tools": [
+        {
+          "name": "get_my_purchases",
+          "payload": {
+            "status": "no_authorized_records",
+            "items": [],
+            "returned": 0,
+            "has_more": false,
+            "next_offset": null,
+            "scope": "authenticated_customer",
+            "unit": "invoice_line",
+            "currency": null
+          }
+        }
+      ],
+      "answer": "I couldn\u2019t find matching purchases for this account on invoice 1, so I can\u2019t list its items. I can\u2019t switch the authenticated customer in chat."
+    }
+  },
+  {
+    "case": "recommend_variety",
+    "thread_id": "01a0d4e5-b4f1-7bf3-9fdb-249a6e81924a",
+    "runs": [
+      {
+        "run_id": "01a0d4e5-b4f3-7c81-bc2d-9de728b1a4d0",
+        "thread_id": "01a0d4e5-b4f1-7bf3-9fdb-249a6e81924a"
+      }
+    ],
+    "scores": {
+      "execution_ok": 1,
+      "required_tool": 1,
+      "expected_status": 1,
+      "purchase_scope": 1,
+      "write_scope": 1,
+      "catalog_grounding": 1,
+      "music_only": 1,
+      "genre_match": 1,
+      "answer_contract": 1,
+      "unowned": 1,
+      "artist_variety": 1,
+      "case_pass": 1
+    },
+    "evidence": {
+      "completed": true,
+      "rows": [],
+      "proposals": [],
+      "tools": [
+        {
+          "name": "recommend_music",
+          "payload": {
+            "status": "ok",
+            "items": [
+              {
+                "track_id": 1146,
+                "track": "Welcome to the Jungle",
+                "album": "Appetite for Destruction",
+                "artist": "Guns N' Roses",
+                "genre": "Rock",
+                "media_type": "Protected AAC audio file",
+                "unit_price": "0.99",
+                "owned_genre_tracks": 14,
+                "owned_artist_tracks": 6,
+                "basis": "purchase_history"
+              },
+              {
+                "track_id": 436,
+                "track": "Detroit Rock City",
+                "album": "Greatest Kiss",
+                "artist": "Kiss",
+                "genre": "Rock",
+                "media_type": "MPEG audio file",
+                "unit_price": "0.99",
+                "owned_genre_tracks": 14,
+                "owned_artist_tracks": 4,
+                "basis": "purchase_history"
+              },
+              {
+                "track_id": 2093,
+                "track": "Bark at the Moon",
+                "album": "Bark at the Moon (Remastered)",
+                "artist": "Ozzy Osbourne",
+                "genre": "Rock",
+                "media_type": "Protected AAC audio file",
+                "unit_price": "0.99",
+                "owned_genre_tracks": 14,
+                "owned_artist_tracks": 3,
+                "basis": "purchase_history"
+              }
+            ],
+            "returned": 3,
+            "requested": 3,
+            "requested_genre": "Rock",
+            "owned_music_tracks": 36,
+            "ranking": "one_per_artist, owned_genre_tracks_desc, owned_artist_tracks_desc, track_id_asc",
+            "different_artists": true,
+            "scope": "authenticated_customer",
+            "owned_tracks_excluded": true,
+            "currency": null
+          }
+        }
+      ],
+      "answer": "Here are three unowned Rock tracks, each by a different artist:\n\n- \u201cWelcome to the Jungle\u201d \u2014 Guns N\u2019 Roses [track:1146]\n- \u201cDetroit Rock City\u201d \u2014 Kiss [track:436]\n- \u201cBark at the Moon\u201d \u2014 Ozzy Osbourne [track:2093]"
+    }
+  },
+  {
+    "case": "support-reject",
+    "passed": true,
+    "thread_id": "01a0d4e5-c4b2-7482-ab95-5eba8bc9685d",
+    "runs": [
+      {
+        "run_id": "01a0d4e5-c4b4-70f3-8c01-6d493ab13eff",
+        "thread_id": "01a0d4e5-c4b2-7482-ab95-5eba8bc9685d"
+      },
+      {
+        "run_id": "01a0d4e5-ccd7-7271-802b-a7417a515969",
+        "thread_id": "01a0d4e5-c4b2-7482-ab95-5eba8bc9685d"
+      }
+    ],
+    "answer": "I did not create a support request because the action was rejected. No case was created by that action."
+  }
+]

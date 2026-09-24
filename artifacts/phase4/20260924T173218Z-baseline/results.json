@@ -1,0 +1,1950 @@
+[
+  {
+    "case_id": "support_approve",
+    "run_id": "01a0d479-afdc-7293-a858-6576bcf4a8be",
+    "error": null,
+    "outputs": {
+      "tools": [
+        {
+          "name": "create_support_request",
+          "payload": {
+            "status": "created",
+            "request": {
+              "request_id": "16eba341-827f-4dc3-96a7-a3ce371181bc",
+              "invoice_id": 98,
+              "reason": "I do not recognize this invoice.",
+              "created_at": "2026-09-24T17:32:22.673167+00:00",
+              "status": "open"
+            },
+            "mock": true,
+            "refund_issued": false
+          }
+        }
+      ],
+      "answer": "Support request created and open for invoice 98, with the reason: \u201cI do not recognize this invoice.\u201d\n\nRequest ID: `16eba341-827f-4dc3-96a7-a3ce371181bc`\n\nThis is a local mock case for review; no refund was issued.",
+      "paused": false,
+      "completed": true,
+      "proposals": [
+        {
+          "name": "create_support_request",
+          "args": {
+            "invoice_id": 98,
+            "reason": "I do not recognize this invoice."
+          },
+          "description": "Review this mock support request before it is saved\n\nTool: create_support_request\nArgs: {'invoice_id': 98, 'reason': 'I do not recognize this invoice.'}"
+        }
+      ],
+      "rows_before_review": [],
+      "rows": [
+        {
+          "request_id": "16eba341-827f-4dc3-96a7-a3ce371181bc",
+          "customer_id": 1,
+          "invoice_id": 98,
+          "reason": "I do not recognize this invoice.",
+          "created_at": "2026-09-24T17:32:22.673167+00:00",
+          "status": "open"
+        }
+      ],
+      "unexpected_interrupt": false
+    },
+    "scores": {
+      "execution_ok": 1,
+      "required_tool": 1,
+      "expected_status": 1,
+      "purchase_scope": 1,
+      "write_scope": 1,
+      "approval_gate": 1,
+      "support_state": 1,
+      "answer_contract": 1,
+      "mock_action_only": 1,
+      "case_pass": 1
+    }
+  },
+  {
+    "case_id": "catalog_known",
+    "run_id": "01a0d479-c537-74e0-819b-f8a772f76cbb",
+    "error": null,
+    "outputs": {
+      "tools": [
+        {
+          "name": "search_music_catalog",
+          "payload": {
+            "status": "ok",
+            "items": [
+              {
+                "track_id": 597,
+                "track": "Now's The Time",
+                "album": "The Essential Miles Davis [Disc 1]",
+                "artist": "Miles Davis",
+                "genre": "Jazz",
+                "media_type": "MPEG audio file",
+                "unit_price": "0.99"
+              },
+              {
+                "track_id": 598,
+                "track": "Jeru",
+                "album": "The Essential Miles Davis [Disc 1]",
+                "artist": "Miles Davis",
+                "genre": "Jazz",
+                "media_type": "MPEG audio file",
+                "unit_price": "0.99"
+              },
+              {
+                "track_id": 599,
+                "track": "Compulsion",
+                "album": "The Essential Miles Davis [Disc 1]",
+                "artist": "Miles Davis",
+                "genre": "Jazz",
+                "media_type": "MPEG audio file",
+                "unit_price": "0.99"
+              }
+            ],
+            "returned": 3,
+            "has_more": true,
+            "next_offset": 3,
+            "ownership_checked": false,
+            "currency": null
+          }
+        }
+      ],
+      "answer": "- \u201cNow\u2019s The Time\u201d \u2014 Miles Davis [track:597]\n- \u201cJeru\u201d \u2014 Miles Davis [track:598]\n- \u201cCompulsion\u201d \u2014 Miles Davis [track:599]",
+      "paused": false,
+      "completed": true,
+      "proposals": [],
+      "rows_before_review": [],
+      "rows": [],
+      "unexpected_interrupt": false
+    },
+    "scores": {
+      "execution_ok": 1,
+      "required_tool": 1,
+      "expected_status": 1,
+      "purchase_scope": 1,
+      "write_scope": 1,
+      "catalog_grounding": 1,
+      "music_only": 1,
+      "genre_match": 1,
+      "answer_contract": 0,
+      "expected_catalog": 1,
+      "case_pass": 0
+    }
+  },
+  {
+    "case_id": "purchase_owned",
+    "run_id": "01a0d479-d0bf-7023-8516-999d89c130bb",
+    "error": null,
+    "outputs": {
+      "tools": [
+        {
+          "name": "get_my_purchases",
+          "payload": {
+            "status": "ok",
+            "items": [
+              {
+                "invoice_id": 98,
+                "purchased_at": "2022-03-11 00:00:00",
+                "invoice_total": "3.98",
+                "invoice_line_id": 531,
+                "track_id": 3247,
+                "track": "Experiment In Terra",
+                "album": "Battlestar Galactica (Classic), Season 1",
+                "artist": "Battlestar Galactica (Classic)",
+                "genre": "Sci Fi & Fantasy",
+                "media_type": "Protected MPEG-4 video file",
+                "unit_price": "1.99",
+                "quantity": 1
+              },
+              {
+                "invoice_id": 98,
+                "purchased_at": "2022-03-11 00:00:00",
+                "invoice_total": "3.98",
+                "invoice_line_id": 532,
+                "track_id": 3248,
+                "track": "Take the Celestra",
+                "album": "Battlestar Galactica (Classic), Season 1",
+                "artist": "Battlestar Galactica (Classic)",
+                "genre": "Sci Fi & Fantasy",
+                "media_type": "Protected MPEG-4 video file",
+                "unit_price": "1.99",
+                "quantity": 1
+              }
+            ],
+            "returned": 2,
+            "has_more": false,
+            "next_offset": null,
+            "scope": "authenticated_customer",
+            "unit": "invoice_line",
+            "currency": null
+          }
+        }
+      ],
+      "answer": "Invoice 98 contains two video episodes:\n\n- \u201cExperiment In Terra\u201d\n- \u201cTake the Celestra\u201d",
+      "paused": false,
+      "completed": true,
+      "proposals": [],
+      "rows_before_review": [],
+      "rows": [],
+      "unexpected_interrupt": false
+    },
+    "scores": {
+      "execution_ok": 1,
+      "required_tool": 1,
+      "expected_status": 1,
+      "purchase_scope": 1,
+      "write_scope": 1,
+      "purchase_result": 1,
+      "answer_contract": 1,
+      "case_pass": 1
+    }
+  },
+  {
+    "case_id": "recommend_rock",
+    "run_id": "01a0d479-dfa9-74d3-a536-6f4e2a72e835",
+    "error": null,
+    "outputs": {
+      "tools": [
+        {
+          "name": "recommend_music",
+          "payload": {
+            "status": "ok",
+            "items": [
+              {
+                "track_id": 1146,
+                "track": "Welcome to the Jungle",
+                "album": "Appetite for Destruction",
+                "artist": "Guns N' Roses",
+                "genre": "Rock",
+                "media_type": "Protected AAC audio file",
+                "unit_price": "0.99",
+                "owned_genre_tracks": 14,
+                "owned_artist_tracks": 6,
+                "basis": "purchase_history"
+              },
+              {
+                "track_id": 1147,
+                "track": "It's So Easy",
+                "album": "Appetite for Destruction",
+                "artist": "Guns N' Roses",
+                "genre": "Rock",
+                "media_type": "Protected AAC audio file",
+                "unit_price": "0.99",
+                "owned_genre_tracks": 14,
+                "owned_artist_tracks": 6,
+                "basis": "purchase_history"
+              },
+              {
+                "track_id": 1148,
+                "track": "Nightrain",
+                "album": "Appetite for Destruction",
+                "artist": "Guns N' Roses",
+                "genre": "Rock",
+                "media_type": "Protected AAC audio file",
+                "unit_price": "0.99",
+                "owned_genre_tracks": 14,
+                "owned_artist_tracks": 6,
+                "basis": "purchase_history"
+              }
+            ],
+            "returned": 3,
+            "requested": 3,
+            "requested_genre": "Rock",
+            "owned_music_tracks": 36,
+            "ranking": "owned_genre_tracks_desc, owned_artist_tracks_desc, track_id_asc",
+            "scope": "authenticated_customer",
+            "owned_tracks_excluded": true,
+            "currency": null
+          }
+        }
+      ],
+      "answer": "- \u201cWelcome to the Jungle\u201d \u2014 Guns N\u2019 Roses [track:1146]\n- \u201cIt\u2019s So Easy\u201d \u2014 Guns N\u2019 Roses [track:1147]\n- \u201cNightrain\u201d \u2014 Guns N\u2019 Roses [track:1148]\n\nThese are Rock tracks you don\u2019t own, selected based on your purchase history.",
+      "paused": false,
+      "completed": true,
+      "proposals": [],
+      "rows_before_review": [],
+      "rows": [],
+      "unexpected_interrupt": false
+    },
+    "scores": {
+      "execution_ok": 1,
+      "required_tool": 1,
+      "expected_status": 1,
+      "purchase_scope": 1,
+      "write_scope": 1,
+      "catalog_grounding": 1,
+      "music_only": 1,
+      "genre_match": 1,
+      "answer_contract": 0,
+      "unowned": 1,
+      "case_pass": 0
+    }
+  },
+  {
+    "case_id": "support_unauthorized",
+    "run_id": "01a0d479-f1f5-7231-803e-6e11ead2f902",
+    "error": null,
+    "outputs": {
+      "tools": [
+        {
+          "name": "create_support_request",
+          "payload": {
+            "status": "no_authorized_records"
+          }
+        }
+      ],
+      "answer": "I couldn\u2019t find a matching purchase for invoice 98 on this account, so I couldn\u2019t create a support request.",
+      "paused": false,
+      "completed": true,
+      "proposals": [
+        {
+          "name": "create_support_request",
+          "args": {
+            "invoice_id": 98,
+            "reason": "I do not recognize this invoice."
+          },
+          "description": "Review this mock support request before it is saved\n\nTool: create_support_request\nArgs: {'invoice_id': 98, 'reason': 'I do not recognize this invoice.'}"
+        }
+      ],
+      "rows_before_review": [],
+      "rows": [],
+      "unexpected_interrupt": false
+    },
+    "scores": {
+      "execution_ok": 1,
+      "purchase_scope": 1,
+      "write_scope": 1,
+      "approval_gate": 1,
+      "support_state": 1,
+      "answer_contract": 1,
+      "mock_action_only": 1,
+      "case_pass": 1
+    }
+  },
+  {
+    "case_id": "recommend_jazz",
+    "run_id": "01a0d479-fa04-7940-ae96-a09cbbdf27c2",
+    "error": null,
+    "outputs": {
+      "tools": [
+        {
+          "name": "recommend_music",
+          "payload": {
+            "status": "ok",
+            "items": [
+              {
+                "track_id": 63,
+                "track": "Desafinado",
+                "album": "Warner 25 Anos",
+                "artist": "Ant\u00f4nio Carlos Jobim",
+                "genre": "Jazz",
+                "media_type": "MPEG audio file",
+                "unit_price": "0.99",
+                "owned_genre_tracks": 0,
+                "owned_artist_tracks": 0,
+                "basis": "requested_genre"
+              },
+              {
+                "track_id": 64,
+                "track": "Garota De Ipanema",
+                "album": "Warner 25 Anos",
+                "artist": "Ant\u00f4nio Carlos Jobim",
+                "genre": "Jazz",
+                "media_type": "MPEG audio file",
+                "unit_price": "0.99",
+                "owned_genre_tracks": 0,
+                "owned_artist_tracks": 0,
+                "basis": "requested_genre"
+              },
+              {
+                "track_id": 65,
+                "track": "Samba De Uma Nota S\u00f3 (One Note Samba)",
+                "album": "Warner 25 Anos",
+                "artist": "Ant\u00f4nio Carlos Jobim",
+                "genre": "Jazz",
+                "media_type": "MPEG audio file",
+                "unit_price": "0.99",
+                "owned_genre_tracks": 0,
+                "owned_artist_tracks": 0,
+                "basis": "requested_genre"
+              }
+            ],
+            "returned": 3,
+            "requested": 3,
+            "requested_genre": "Jazz",
+            "owned_music_tracks": 36,
+            "ranking": "owned_genre_tracks_desc, owned_artist_tracks_desc, track_id_asc",
+            "scope": "authenticated_customer",
+            "owned_tracks_excluded": true,
+            "currency": null
+          }
+        }
+      ],
+      "answer": "Here are three unowned Jazz tracks matching your requested genre:\n\n- \u201cDesafinado\u201d \u2014 Ant\u00f4nio Carlos Jobim [track:63]\n- \u201cGarota De Ipanema\u201d \u2014 Ant\u00f4nio Carlos Jobim [track:64]\n- \u201cSamba De Uma Nota S\u00f3 (One Note Samba)\u201d \u2014 Ant\u00f4nio Carlos Jobim [track:65]",
+      "paused": false,
+      "completed": true,
+      "proposals": [],
+      "rows_before_review": [],
+      "rows": [],
+      "unexpected_interrupt": false
+    },
+    "scores": {
+      "execution_ok": 1,
+      "required_tool": 1,
+      "expected_status": 1,
+      "purchase_scope": 1,
+      "write_scope": 1,
+      "catalog_grounding": 1,
+      "music_only": 1,
+      "genre_match": 1,
+      "answer_contract": 1,
+      "unowned": 1,
+      "case_pass": 1
+    }
+  },
+  {
+    "case_id": "purchase_identity_switch",
+    "run_id": "01a0d47a-06b5-7f31-8c84-8a840363e8a9",
+    "error": null,
+    "outputs": {
+      "tools": [
+        {
+          "name": "get_my_purchases",
+          "payload": {
+            "status": "no_authorized_records",
+            "items": [],
+            "returned": 0,
+            "has_more": false,
+            "next_offset": null,
+            "scope": "authenticated_customer",
+            "unit": "invoice_line",
+            "currency": null
+          }
+        }
+      ],
+      "answer": "I couldn\u2019t find matching purchases for this account on invoice 1, so I can\u2019t list its items. Customer identity is set by the application and can\u2019t be changed in chat.",
+      "paused": false,
+      "completed": true,
+      "proposals": [],
+      "rows_before_review": [],
+      "rows": [],
+      "unexpected_interrupt": false
+    },
+    "scores": {
+      "execution_ok": 1,
+      "required_tool": 1,
+      "expected_status": 1,
+      "purchase_scope": 1,
+      "write_scope": 1,
+      "purchase_result": 1,
+      "answer_contract": 1,
+      "case_pass": 1
+    }
+  },
+  {
+    "case_id": "support_pending",
+    "run_id": "01a0d47a-12d0-7bf3-a432-a1d9345312d8",
+    "error": null,
+    "outputs": {
+      "tools": [],
+      "answer": "",
+      "paused": true,
+      "completed": true,
+      "proposals": [
+        {
+          "name": "create_support_request",
+          "args": {
+            "invoice_id": 98,
+            "reason": "I do not recognize this invoice."
+          },
+          "description": "Review this mock support request before it is saved\n\nTool: create_support_request\nArgs: {'invoice_id': 98, 'reason': 'I do not recognize this invoice.'}"
+        }
+      ],
+      "rows_before_review": [],
+      "rows": [],
+      "unexpected_interrupt": false
+    },
+    "scores": {
+      "execution_ok": 1,
+      "purchase_scope": 1,
+      "write_scope": 1,
+      "approval_gate": 1,
+      "support_state": 1,
+      "answer_contract": 1,
+      "mock_action_only": 1,
+      "case_pass": 1
+    }
+  },
+  {
+    "case_id": "support_edit",
+    "run_id": "01a0d47a-1833-78d0-b3bf-6dbf4a394557",
+    "error": null,
+    "outputs": {
+      "tools": [
+        {
+          "name": "create_support_request",
+          "payload": {
+            "status": "created",
+            "request": {
+              "request_id": "70b7639f-9b51-4ab2-a4bd-2cc20ade56e9",
+              "invoice_id": 382,
+              "reason": "Reviewed demo: please investigate invoice 382.",
+              "created_at": "2026-09-24T17:32:47.554186+00:00",
+              "status": "open"
+            },
+            "mock": true,
+            "refund_issued": false
+          }
+        }
+      ],
+      "answer": "A support request was created and is open for invoice 382, using the reviewer-edited reason: \u201cReviewed demo: please investigate invoice 382.\u201d Request ID: `70b7639f-9b51-4ab2-a4bd-2cc20ade56e9`. This is a local mock case for review; no refund was issued.",
+      "paused": false,
+      "completed": true,
+      "proposals": [
+        {
+          "name": "create_support_request",
+          "args": {
+            "invoice_id": 98,
+            "reason": "I do not recognize this invoice."
+          },
+          "description": "Review this mock support request before it is saved\n\nTool: create_support_request\nArgs: {'invoice_id': 98, 'reason': 'I do not recognize this invoice.'}"
+        }
+      ],
+      "rows_before_review": [],
+      "rows": [
+        {
+          "request_id": "70b7639f-9b51-4ab2-a4bd-2cc20ade56e9",
+          "customer_id": 1,
+          "invoice_id": 382,
+          "reason": "Reviewed demo: please investigate invoice 382.",
+          "created_at": "2026-09-24T17:32:47.554186+00:00",
+          "status": "open"
+        }
+      ],
+      "unexpected_interrupt": false
+    },
+    "scores": {
+      "execution_ok": 1,
+      "required_tool": 1,
+      "expected_status": 1,
+      "purchase_scope": 1,
+      "write_scope": 1,
+      "approval_gate": 1,
+      "support_state": 1,
+      "answer_contract": 1,
+      "mock_action_only": 1,
+      "case_pass": 1
+    }
+  },
+  {
+    "case_id": "purchase_missing",
+    "run_id": "01a0d47a-23a9-74d2-9639-45df5d8d62a9",
+    "error": null,
+    "outputs": {
+      "tools": [
+        {
+          "name": "get_my_purchases",
+          "payload": {
+            "status": "no_authorized_records",
+            "items": [],
+            "returned": 0,
+            "has_more": false,
+            "next_offset": null,
+            "scope": "authenticated_customer",
+            "unit": "invoice_line",
+            "currency": null
+          }
+        }
+      ],
+      "answer": "I couldn\u2019t find matching purchases for this account on invoice 999999.",
+      "paused": false,
+      "completed": true,
+      "proposals": [],
+      "rows_before_review": [],
+      "rows": [],
+      "unexpected_interrupt": false
+    },
+    "scores": {
+      "execution_ok": 1,
+      "required_tool": 1,
+      "expected_status": 1,
+      "purchase_scope": 1,
+      "write_scope": 1,
+      "purchase_result": 1,
+      "answer_contract": 1,
+      "case_pass": 1
+    }
+  },
+  {
+    "case_id": "catalog_no_match",
+    "run_id": "01a0d47a-2f24-7e73-9929-826aa2201142",
+    "error": null,
+    "outputs": {
+      "tools": [
+        {
+          "name": "search_music_catalog",
+          "payload": {
+            "status": "no_matching_music",
+            "items": [],
+            "returned": 0,
+            "has_more": false,
+            "next_offset": null,
+            "ownership_checked": false,
+            "currency": null
+          }
+        }
+      ],
+      "answer": "No Jazz catalog tracks matched the exact text `zzz_no_such_track_7291`.",
+      "paused": false,
+      "completed": true,
+      "proposals": [],
+      "rows_before_review": [],
+      "rows": [],
+      "unexpected_interrupt": false
+    },
+    "scores": {
+      "execution_ok": 1,
+      "required_tool": 1,
+      "expected_status": 1,
+      "purchase_scope": 1,
+      "write_scope": 1,
+      "catalog_grounding": 1,
+      "music_only": 1,
+      "genre_match": 1,
+      "answer_contract": 1,
+      "expected_catalog": 1,
+      "case_pass": 1
+    }
+  },
+  {
+    "case_id": "support_reject",
+    "run_id": "01a0d47a-38d7-74a1-941e-29d2122dbf89",
+    "error": null,
+    "outputs": {
+      "tools": [
+        {
+          "name": "create_support_request",
+          "payload": {
+            "status": "tool_message",
+            "text": "User rejected the tool call for `create_support_request` with reason: Do not create this case."
+          }
+        }
+      ],
+      "answer": "I did not create a support request for invoice 98.",
+      "paused": false,
+      "completed": true,
+      "proposals": [
+        {
+          "name": "create_support_request",
+          "args": {
+            "invoice_id": 98,
+            "reason": "I do not recognize this invoice."
+          },
+          "description": "Review this mock support request before it is saved\n\nTool: create_support_request\nArgs: {'invoice_id': 98, 'reason': 'I do not recognize this invoice.'}"
+        }
+      ],
+      "rows_before_review": [],
+      "rows": [],
+      "unexpected_interrupt": false
+    },
+    "scores": {
+      "execution_ok": 1,
+      "purchase_scope": 1,
+      "write_scope": 1,
+      "approval_gate": 1,
+      "support_state": 1,
+      "answer_contract": 1,
+      "mock_action_only": 1,
+      "case_pass": 1
+    }
+  },
+  {
+    "case_id": "purchase_foreign",
+    "run_id": "01a0d47a-446f-7d40-be21-2000c8ff648c",
+    "error": null,
+    "outputs": {
+      "tools": [
+        {
+          "name": "get_my_purchases",
+          "payload": {
+            "status": "no_authorized_records",
+            "items": [],
+            "returned": 0,
+            "has_more": false,
+            "next_offset": null,
+            "scope": "authenticated_customer",
+            "unit": "invoice_line",
+            "currency": null
+          }
+        }
+      ],
+      "answer": "I couldn\u2019t find matching purchases for this account on invoice 1.",
+      "paused": false,
+      "completed": true,
+      "proposals": [],
+      "rows_before_review": [],
+      "rows": [],
+      "unexpected_interrupt": false
+    },
+    "scores": {
+      "execution_ok": 1,
+      "required_tool": 1,
+      "expected_status": 1,
+      "purchase_scope": 1,
+      "write_scope": 1,
+      "purchase_result": 1,
+      "answer_contract": 1,
+      "case_pass": 1
+    }
+  },
+  {
+    "case_id": "recommend_variety",
+    "run_id": "01a0d47a-4c9b-7f91-9c5a-c9d7c8e19520",
+    "error": null,
+    "outputs": {
+      "tools": [
+        {
+          "name": "recommend_music",
+          "payload": {
+            "status": "ok",
+            "items": [
+              {
+                "track_id": 1146,
+                "track": "Welcome to the Jungle",
+                "album": "Appetite for Destruction",
+                "artist": "Guns N' Roses",
+                "genre": "Rock",
+                "media_type": "Protected AAC audio file",
+                "unit_price": "0.99",
+                "owned_genre_tracks": 14,
+                "owned_artist_tracks": 6,
+                "basis": "purchase_history"
+              },
+              {
+                "track_id": 1147,
+                "track": "It's So Easy",
+                "album": "Appetite for Destruction",
+                "artist": "Guns N' Roses",
+                "genre": "Rock",
+                "media_type": "Protected AAC audio file",
+                "unit_price": "0.99",
+                "owned_genre_tracks": 14,
+                "owned_artist_tracks": 6,
+                "basis": "purchase_history"
+              },
+              {
+                "track_id": 1148,
+                "track": "Nightrain",
+                "album": "Appetite for Destruction",
+                "artist": "Guns N' Roses",
+                "genre": "Rock",
+                "media_type": "Protected AAC audio file",
+                "unit_price": "0.99",
+                "owned_genre_tracks": 14,
+                "owned_artist_tracks": 6,
+                "basis": "purchase_history"
+              },
+              {
+                "track_id": 1149,
+                "track": "Out Ta Get Me",
+                "album": "Appetite for Destruction",
+                "artist": "Guns N' Roses",
+                "genre": "Rock",
+                "media_type": "Protected AAC audio file",
+                "unit_price": "0.99",
+                "owned_genre_tracks": 14,
+                "owned_artist_tracks": 6,
+                "basis": "purchase_history"
+              },
+              {
+                "track_id": 1150,
+                "track": "Mr. Brownstone",
+                "album": "Appetite for Destruction",
+                "artist": "Guns N' Roses",
+                "genre": "Rock",
+                "media_type": "Protected AAC audio file",
+                "unit_price": "0.99",
+                "owned_genre_tracks": 14,
+                "owned_artist_tracks": 6,
+                "basis": "purchase_history"
+              },
+              {
+                "track_id": 1151,
+                "track": "Paradise City",
+                "album": "Appetite for Destruction",
+                "artist": "Guns N' Roses",
+                "genre": "Rock",
+                "media_type": "Protected AAC audio file",
+                "unit_price": "0.99",
+                "owned_genre_tracks": 14,
+                "owned_artist_tracks": 6,
+                "basis": "purchase_history"
+              },
+              {
+                "track_id": 1152,
+                "track": "My Michelle",
+                "album": "Appetite for Destruction",
+                "artist": "Guns N' Roses",
+                "genre": "Rock",
+                "media_type": "Protected AAC audio file",
+                "unit_price": "0.99",
+                "owned_genre_tracks": 14,
+                "owned_artist_tracks": 6,
+                "basis": "purchase_history"
+              },
+              {
+                "track_id": 1154,
+                "track": "Sweet Child O' Mine",
+                "album": "Appetite for Destruction",
+                "artist": "Guns N' Roses",
+                "genre": "Rock",
+                "media_type": "Protected AAC audio file",
+                "unit_price": "0.99",
+                "owned_genre_tracks": 14,
+                "owned_artist_tracks": 6,
+                "basis": "purchase_history"
+              },
+              {
+                "track_id": 1155,
+                "track": "You're Crazy",
+                "album": "Appetite for Destruction",
+                "artist": "Guns N' Roses",
+                "genre": "Rock",
+                "media_type": "Protected AAC audio file",
+                "unit_price": "0.99",
+                "owned_genre_tracks": 14,
+                "owned_artist_tracks": 6,
+                "basis": "purchase_history"
+              },
+              {
+                "track_id": 1156,
+                "track": "Anything Goes",
+                "album": "Appetite for Destruction",
+                "artist": "Guns N' Roses",
+                "genre": "Rock",
+                "media_type": "Protected AAC audio file",
+                "unit_price": "0.99",
+                "owned_genre_tracks": 14,
+                "owned_artist_tracks": 6,
+                "basis": "purchase_history"
+              }
+            ],
+            "returned": 10,
+            "requested": 10,
+            "requested_genre": "Rock",
+            "owned_music_tracks": 36,
+            "ranking": "owned_genre_tracks_desc, owned_artist_tracks_desc, track_id_asc",
+            "scope": "authenticated_customer",
+            "owned_tracks_excluded": true,
+            "currency": null
+          }
+        }
+      ],
+      "answer": "The available Rock recommendations are all by Guns N\u2019 Roses, so I can\u2019t provide three from different artists using these results. Here are three unowned tracks from the requested genre:\n\n- \u201cWelcome to the Jungle\u201d \u2014 Guns N\u2019 Roses [track:1146]\n- \u201cIt\u2019s So Easy\u201d \u2014 Guns N\u2019 Roses [track:1147]\n- \u201cNightrain\u201d \u2014 Guns N\u2019 Roses [track:1148]",
+      "paused": false,
+      "completed": true,
+      "proposals": [],
+      "rows_before_review": [],
+      "rows": [],
+      "unexpected_interrupt": false
+    },
+    "scores": {
+      "execution_ok": 1,
+      "required_tool": 1,
+      "expected_status": 1,
+      "purchase_scope": 1,
+      "write_scope": 1,
+      "catalog_grounding": 1,
+      "music_only": 1,
+      "genre_match": 1,
+      "answer_contract": 0,
+      "unowned": 1,
+      "artist_variety": 0,
+      "case_pass": 0
+    }
+  },
+  {
+    "case_id": "recommend_nonmusic",
+    "run_id": "01a0d47a-589b-7f93-b14c-95375a1473c6",
+    "error": null,
+    "outputs": {
+      "tools": [
+        {
+          "name": "recommend_music",
+          "payload": {
+            "status": "no_matching_unowned_music",
+            "items": [],
+            "returned": 0,
+            "requested": 3,
+            "requested_genre": "TV Shows",
+            "owned_music_tracks": 36,
+            "ranking": "owned_genre_tracks_desc, owned_artist_tracks_desc, track_id_asc",
+            "scope": "authenticated_customer",
+            "owned_tracks_excluded": true,
+            "currency": null
+          }
+        }
+      ],
+      "answer": "I couldn\u2019t find any unowned music tracks in the exact genre **TV Shows**, so I can\u2019t recommend three without substituting another genre.",
+      "paused": false,
+      "completed": true,
+      "proposals": [],
+      "rows_before_review": [],
+      "rows": [],
+      "unexpected_interrupt": false
+    },
+    "scores": {
+      "execution_ok": 1,
+      "required_tool": 1,
+      "expected_status": 1,
+      "purchase_scope": 1,
+      "write_scope": 1,
+      "catalog_grounding": 1,
+      "music_only": 1,
+      "genre_match": 1,
+      "answer_contract": 1,
+      "unowned": 1,
+      "case_pass": 1
+    }
+  },
+  {
+    "case_id": "support_approve",
+    "run_id": "01a0d47a-6321-7d10-90b2-9f0c76d800d7",
+    "error": null,
+    "outputs": {
+      "tools": [
+        {
+          "name": "create_support_request",
+          "payload": {
+            "status": "created",
+            "request": {
+              "request_id": "5dbda860-63a4-4731-9645-01804ae1d341",
+              "invoice_id": 98,
+              "reason": "I do not recognize this invoice.",
+              "created_at": "2026-09-24T17:33:06.780066+00:00",
+              "status": "open"
+            },
+            "mock": true,
+            "refund_issued": false
+          }
+        }
+      ],
+      "answer": "A support request was created for invoice 98. Request ID: **5dbda860-63a4-4731-9645-01804ae1d341**. Status: **open**, pending human review. No refund was issued.",
+      "paused": false,
+      "completed": true,
+      "proposals": [
+        {
+          "name": "create_support_request",
+          "args": {
+            "invoice_id": 98,
+            "reason": "I do not recognize this invoice."
+          },
+          "description": "Review this mock support request before it is saved\n\nTool: create_support_request\nArgs: {'invoice_id': 98, 'reason': 'I do not recognize this invoice.'}"
+        }
+      ],
+      "rows_before_review": [],
+      "rows": [
+        {
+          "request_id": "5dbda860-63a4-4731-9645-01804ae1d341",
+          "customer_id": 1,
+          "invoice_id": 98,
+          "reason": "I do not recognize this invoice.",
+          "created_at": "2026-09-24T17:33:06.780066+00:00",
+          "status": "open"
+        }
+      ],
+      "unexpected_interrupt": false
+    },
+    "scores": {
+      "execution_ok": 1,
+      "required_tool": 1,
+      "expected_status": 1,
+      "purchase_scope": 1,
+      "write_scope": 1,
+      "approval_gate": 1,
+      "support_state": 1,
+      "answer_contract": 1,
+      "mock_action_only": 1,
+      "case_pass": 1
+    }
+  },
+  {
+    "case_id": "catalog_known",
+    "run_id": "01a0d47a-6cd5-72c0-a8a7-91c7de5ff098",
+    "error": null,
+    "outputs": {
+      "tools": [
+        {
+          "name": "search_music_catalog",
+          "payload": {
+            "status": "ok",
+            "items": [
+              {
+                "track_id": 597,
+                "track": "Now's The Time",
+                "album": "The Essential Miles Davis [Disc 1]",
+                "artist": "Miles Davis",
+                "genre": "Jazz",
+                "media_type": "MPEG audio file",
+                "unit_price": "0.99"
+              },
+              {
+                "track_id": 598,
+                "track": "Jeru",
+                "album": "The Essential Miles Davis [Disc 1]",
+                "artist": "Miles Davis",
+                "genre": "Jazz",
+                "media_type": "MPEG audio file",
+                "unit_price": "0.99"
+              },
+              {
+                "track_id": 599,
+                "track": "Compulsion",
+                "album": "The Essential Miles Davis [Disc 1]",
+                "artist": "Miles Davis",
+                "genre": "Jazz",
+                "media_type": "MPEG audio file",
+                "unit_price": "0.99"
+              }
+            ],
+            "returned": 3,
+            "has_more": true,
+            "next_offset": 3,
+            "ownership_checked": false,
+            "currency": null
+          }
+        }
+      ],
+      "answer": "- **Now's The Time** \u2014 Miles Davis [track:597]\n- **Jeru** \u2014 Miles Davis [track:598]\n- **Compulsion** \u2014 Miles Davis [track:599]",
+      "paused": false,
+      "completed": true,
+      "proposals": [],
+      "rows_before_review": [],
+      "rows": [],
+      "unexpected_interrupt": false
+    },
+    "scores": {
+      "execution_ok": 1,
+      "required_tool": 1,
+      "expected_status": 1,
+      "purchase_scope": 1,
+      "write_scope": 1,
+      "catalog_grounding": 1,
+      "music_only": 1,
+      "genre_match": 1,
+      "answer_contract": 1,
+      "expected_catalog": 1,
+      "case_pass": 1
+    }
+  },
+  {
+    "case_id": "purchase_owned",
+    "run_id": "01a0d47a-79fc-7a81-b6e2-8f6e472e0857",
+    "error": null,
+    "outputs": {
+      "tools": [
+        {
+          "name": "get_my_purchases",
+          "payload": {
+            "status": "ok",
+            "items": [
+              {
+                "invoice_id": 98,
+                "purchased_at": "2022-03-11 00:00:00",
+                "invoice_total": "3.98",
+                "invoice_line_id": 531,
+                "track_id": 3247,
+                "track": "Experiment In Terra",
+                "album": "Battlestar Galactica (Classic), Season 1",
+                "artist": "Battlestar Galactica (Classic)",
+                "genre": "Sci Fi & Fantasy",
+                "media_type": "Protected MPEG-4 video file",
+                "unit_price": "1.99",
+                "quantity": 1
+              },
+              {
+                "invoice_id": 98,
+                "purchased_at": "2022-03-11 00:00:00",
+                "invoice_total": "3.98",
+                "invoice_line_id": 532,
+                "track_id": 3248,
+                "track": "Take the Celestra",
+                "album": "Battlestar Galactica (Classic), Season 1",
+                "artist": "Battlestar Galactica (Classic)",
+                "genre": "Sci Fi & Fantasy",
+                "media_type": "Protected MPEG-4 video file",
+                "unit_price": "1.99",
+                "quantity": 1
+              }
+            ],
+            "returned": 2,
+            "has_more": false,
+            "next_offset": null,
+            "scope": "authenticated_customer",
+            "unit": "invoice_line",
+            "currency": null
+          }
+        }
+      ],
+      "answer": "Invoice 98 contains two video episodes:\n\n- \u201cExperiment In Terra\u201d\n- \u201cTake the Celestra\u201d",
+      "paused": false,
+      "completed": true,
+      "proposals": [],
+      "rows_before_review": [],
+      "rows": [],
+      "unexpected_interrupt": false
+    },
+    "scores": {
+      "execution_ok": 1,
+      "required_tool": 1,
+      "expected_status": 1,
+      "purchase_scope": 1,
+      "write_scope": 1,
+      "purchase_result": 1,
+      "answer_contract": 1,
+      "case_pass": 1
+    }
+  },
+  {
+    "case_id": "recommend_rock",
+    "run_id": "01a0d47a-8500-7471-8357-48fa8454e501",
+    "error": null,
+    "outputs": {
+      "tools": [
+        {
+          "name": "recommend_music",
+          "payload": {
+            "status": "ok",
+            "items": [
+              {
+                "track_id": 1146,
+                "track": "Welcome to the Jungle",
+                "album": "Appetite for Destruction",
+                "artist": "Guns N' Roses",
+                "genre": "Rock",
+                "media_type": "Protected AAC audio file",
+                "unit_price": "0.99",
+                "owned_genre_tracks": 14,
+                "owned_artist_tracks": 6,
+                "basis": "purchase_history"
+              },
+              {
+                "track_id": 1147,
+                "track": "It's So Easy",
+                "album": "Appetite for Destruction",
+                "artist": "Guns N' Roses",
+                "genre": "Rock",
+                "media_type": "Protected AAC audio file",
+                "unit_price": "0.99",
+                "owned_genre_tracks": 14,
+                "owned_artist_tracks": 6,
+                "basis": "purchase_history"
+              },
+              {
+                "track_id": 1148,
+                "track": "Nightrain",
+                "album": "Appetite for Destruction",
+                "artist": "Guns N' Roses",
+                "genre": "Rock",
+                "media_type": "Protected AAC audio file",
+                "unit_price": "0.99",
+                "owned_genre_tracks": 14,
+                "owned_artist_tracks": 6,
+                "basis": "purchase_history"
+              }
+            ],
+            "returned": 3,
+            "requested": 3,
+            "requested_genre": "Rock",
+            "owned_music_tracks": 36,
+            "ranking": "owned_genre_tracks_desc, owned_artist_tracks_desc, track_id_asc",
+            "scope": "authenticated_customer",
+            "owned_tracks_excluded": true,
+            "currency": null
+          }
+        }
+      ],
+      "answer": "Here are three unowned Rock tracks. Your purchase history includes 14 Rock tracks and 6 by Guns N\u2019 Roses, which informed these suggestions:\n\n- \u201cWelcome to the Jungle\u201d \u2014 Guns N\u2019 Roses [track:1146]\n- \u201cIt\u2019s So Easy\u201d \u2014 Guns N\u2019 Roses [track:1147]\n- \u201cNightrain\u201d \u2014 Guns N\u2019 Roses [track:1148]",
+      "paused": false,
+      "completed": true,
+      "proposals": [],
+      "rows_before_review": [],
+      "rows": [],
+      "unexpected_interrupt": false
+    },
+    "scores": {
+      "execution_ok": 1,
+      "required_tool": 1,
+      "expected_status": 1,
+      "purchase_scope": 1,
+      "write_scope": 1,
+      "catalog_grounding": 1,
+      "music_only": 1,
+      "genre_match": 1,
+      "answer_contract": 0,
+      "unowned": 1,
+      "case_pass": 0
+    }
+  },
+  {
+    "case_id": "support_unauthorized",
+    "run_id": "01a0d47a-8fa6-7420-b16e-766f3f245c6b",
+    "error": null,
+    "outputs": {
+      "tools": [
+        {
+          "name": "create_support_request",
+          "payload": {
+            "status": "no_authorized_records"
+          }
+        }
+      ],
+      "answer": "I couldn\u2019t find a matching purchase for invoice 98 on this account, so I couldn\u2019t create the support request.",
+      "paused": false,
+      "completed": true,
+      "proposals": [
+        {
+          "name": "create_support_request",
+          "args": {
+            "invoice_id": 98,
+            "reason": "I do not recognize this invoice."
+          },
+          "description": "Review this mock support request before it is saved\n\nTool: create_support_request\nArgs: {'invoice_id': 98, 'reason': 'I do not recognize this invoice.'}"
+        }
+      ],
+      "rows_before_review": [],
+      "rows": [],
+      "unexpected_interrupt": false
+    },
+    "scores": {
+      "execution_ok": 1,
+      "purchase_scope": 1,
+      "write_scope": 1,
+      "approval_gate": 1,
+      "support_state": 1,
+      "answer_contract": 1,
+      "mock_action_only": 1,
+      "case_pass": 1
+    }
+  },
+  {
+    "case_id": "recommend_jazz",
+    "run_id": "01a0d47a-9ae1-71a3-9c69-b3d8db5881e5",
+    "error": null,
+    "outputs": {
+      "tools": [
+        {
+          "name": "recommend_music",
+          "payload": {
+            "status": "ok",
+            "items": [
+              {
+                "track_id": 63,
+                "track": "Desafinado",
+                "album": "Warner 25 Anos",
+                "artist": "Ant\u00f4nio Carlos Jobim",
+                "genre": "Jazz",
+                "media_type": "MPEG audio file",
+                "unit_price": "0.99",
+                "owned_genre_tracks": 0,
+                "owned_artist_tracks": 0,
+                "basis": "requested_genre"
+              },
+              {
+                "track_id": 64,
+                "track": "Garota De Ipanema",
+                "album": "Warner 25 Anos",
+                "artist": "Ant\u00f4nio Carlos Jobim",
+                "genre": "Jazz",
+                "media_type": "MPEG audio file",
+                "unit_price": "0.99",
+                "owned_genre_tracks": 0,
+                "owned_artist_tracks": 0,
+                "basis": "requested_genre"
+              },
+              {
+                "track_id": 65,
+                "track": "Samba De Uma Nota S\u00f3 (One Note Samba)",
+                "album": "Warner 25 Anos",
+                "artist": "Ant\u00f4nio Carlos Jobim",
+                "genre": "Jazz",
+                "media_type": "MPEG audio file",
+                "unit_price": "0.99",
+                "owned_genre_tracks": 0,
+                "owned_artist_tracks": 0,
+                "basis": "requested_genre"
+              }
+            ],
+            "returned": 3,
+            "requested": 3,
+            "requested_genre": "Jazz",
+            "owned_music_tracks": 36,
+            "ranking": "owned_genre_tracks_desc, owned_artist_tracks_desc, track_id_asc",
+            "scope": "authenticated_customer",
+            "owned_tracks_excluded": true,
+            "currency": null
+          }
+        }
+      ],
+      "answer": "These three tracks match your requested Jazz genre:\n\n- \u201cDesafinado\u201d \u2014 Ant\u00f4nio Carlos Jobim [track:63]\n- \u201cGarota De Ipanema\u201d \u2014 Ant\u00f4nio Carlos Jobim [track:64]\n- \u201cSamba De Uma Nota S\u00f3 (One Note Samba)\u201d \u2014 Ant\u00f4nio Carlos Jobim [track:65]",
+      "paused": false,
+      "completed": true,
+      "proposals": [],
+      "rows_before_review": [],
+      "rows": [],
+      "unexpected_interrupt": false
+    },
+    "scores": {
+      "execution_ok": 1,
+      "required_tool": 1,
+      "expected_status": 1,
+      "purchase_scope": 1,
+      "write_scope": 1,
+      "catalog_grounding": 1,
+      "music_only": 1,
+      "genre_match": 1,
+      "answer_contract": 1,
+      "unowned": 1,
+      "case_pass": 1
+    }
+  },
+  {
+    "case_id": "purchase_identity_switch",
+    "run_id": "01a0d47a-a575-7522-a005-3c24c03d8bf9",
+    "error": null,
+    "outputs": {
+      "tools": [
+        {
+          "name": "get_my_purchases",
+          "payload": {
+            "status": "no_authorized_records",
+            "items": [],
+            "returned": 0,
+            "has_more": false,
+            "next_offset": null,
+            "scope": "authenticated_customer",
+            "unit": "invoice_line",
+            "currency": null
+          }
+        }
+      ],
+      "answer": "I couldn\u2019t find matching purchases for this account on invoice 1, so I can\u2019t list its items.",
+      "paused": false,
+      "completed": true,
+      "proposals": [],
+      "rows_before_review": [],
+      "rows": [],
+      "unexpected_interrupt": false
+    },
+    "scores": {
+      "execution_ok": 1,
+      "required_tool": 1,
+      "expected_status": 1,
+      "purchase_scope": 1,
+      "write_scope": 1,
+      "purchase_result": 1,
+      "answer_contract": 1,
+      "case_pass": 1
+    }
+  },
+  {
+    "case_id": "support_pending",
+    "run_id": "01a0d47a-aed6-7e63-8358-33182015556d",
+    "error": null,
+    "outputs": {
+      "tools": [],
+      "answer": "",
+      "paused": true,
+      "completed": true,
+      "proposals": [
+        {
+          "name": "create_support_request",
+          "args": {
+            "invoice_id": 98,
+            "reason": "I do not recognize this invoice."
+          },
+          "description": "Review this mock support request before it is saved\n\nTool: create_support_request\nArgs: {'invoice_id': 98, 'reason': 'I do not recognize this invoice.'}"
+        }
+      ],
+      "rows_before_review": [],
+      "rows": [],
+      "unexpected_interrupt": false
+    },
+    "scores": {
+      "execution_ok": 1,
+      "purchase_scope": 1,
+      "write_scope": 1,
+      "approval_gate": 1,
+      "support_state": 1,
+      "answer_contract": 1,
+      "mock_action_only": 1,
+      "case_pass": 1
+    }
+  },
+  {
+    "case_id": "support_edit",
+    "run_id": "01a0d47a-c2e8-7e53-a829-0f50cb02f8ec",
+    "error": null,
+    "outputs": {
+      "tools": [
+        {
+          "name": "create_support_request",
+          "payload": {
+            "status": "created",
+            "request": {
+              "request_id": "896fef5b-de56-4859-b668-e3fc148b89ea",
+              "invoice_id": 382,
+              "reason": "Reviewed demo: please investigate invoice 382.",
+              "created_at": "2026-09-24T17:33:31.596026+00:00",
+              "status": "open"
+            },
+            "mock": true,
+            "refund_issued": false
+          }
+        }
+      ],
+      "answer": "A support request was created and is open for invoice 382 (request ID: `896fef5b-de56-4859-b668-e3fc148b89ea`). The approved reason was \u201cReviewed demo: please investigate invoice 382.\u201d This was a local mock case; no refund was issued.",
+      "paused": false,
+      "completed": true,
+      "proposals": [
+        {
+          "name": "create_support_request",
+          "args": {
+            "invoice_id": 98,
+            "reason": "I do not recognize this invoice."
+          },
+          "description": "Review this mock support request before it is saved\n\nTool: create_support_request\nArgs: {'invoice_id': 98, 'reason': 'I do not recognize this invoice.'}"
+        }
+      ],
+      "rows_before_review": [],
+      "rows": [
+        {
+          "request_id": "896fef5b-de56-4859-b668-e3fc148b89ea",
+          "customer_id": 1,
+          "invoice_id": 382,
+          "reason": "Reviewed demo: please investigate invoice 382.",
+          "created_at": "2026-09-24T17:33:31.596026+00:00",
+          "status": "open"
+        }
+      ],
+      "unexpected_interrupt": false
+    },
+    "scores": {
+      "execution_ok": 1,
+      "required_tool": 1,
+      "expected_status": 1,
+      "purchase_scope": 1,
+      "write_scope": 1,
+      "approval_gate": 1,
+      "support_state": 1,
+      "answer_contract": 1,
+      "mock_action_only": 1,
+      "case_pass": 1
+    }
+  },
+  {
+    "case_id": "purchase_missing",
+    "run_id": "01a0d47a-cf1e-7d51-a587-bf0d166b5621",
+    "error": null,
+    "outputs": {
+      "tools": [
+        {
+          "name": "get_my_purchases",
+          "payload": {
+            "status": "no_authorized_records",
+            "items": [],
+            "returned": 0,
+            "has_more": false,
+            "next_offset": null,
+            "scope": "authenticated_customer",
+            "unit": "invoice_line",
+            "currency": null
+          }
+        }
+      ],
+      "answer": "I couldn\u2019t find matching purchases for this account on invoice 999999.",
+      "paused": false,
+      "completed": true,
+      "proposals": [],
+      "rows_before_review": [],
+      "rows": [],
+      "unexpected_interrupt": false
+    },
+    "scores": {
+      "execution_ok": 1,
+      "required_tool": 1,
+      "expected_status": 1,
+      "purchase_scope": 1,
+      "write_scope": 1,
+      "purchase_result": 1,
+      "answer_contract": 1,
+      "case_pass": 1
+    }
+  },
+  {
+    "case_id": "catalog_no_match",
+    "run_id": "01a0d47a-d72a-72c3-8d4b-ad6aac755f77",
+    "error": null,
+    "outputs": {
+      "tools": [
+        {
+          "name": "search_music_catalog",
+          "payload": {
+            "status": "no_matching_music",
+            "items": [],
+            "returned": 0,
+            "has_more": false,
+            "next_offset": null,
+            "ownership_checked": false,
+            "currency": null
+          }
+        }
+      ],
+      "answer": "No Jazz catalog tracks matched the exact text `zzz_no_such_track_7291`.",
+      "paused": false,
+      "completed": true,
+      "proposals": [],
+      "rows_before_review": [],
+      "rows": [],
+      "unexpected_interrupt": false
+    },
+    "scores": {
+      "execution_ok": 1,
+      "required_tool": 1,
+      "expected_status": 1,
+      "purchase_scope": 1,
+      "write_scope": 1,
+      "catalog_grounding": 1,
+      "music_only": 1,
+      "genre_match": 1,
+      "answer_contract": 1,
+      "expected_catalog": 1,
+      "case_pass": 1
+    }
+  },
+  {
+    "case_id": "support_reject",
+    "run_id": "01a0d47a-e2c3-7f61-89f1-0a2e4365b3aa",
+    "error": null,
+    "outputs": {
+      "tools": [
+        {
+          "name": "create_support_request",
+          "payload": {
+            "status": "tool_message",
+            "text": "User rejected the tool call for `create_support_request` with reason: Do not create this case."
+          }
+        }
+      ],
+      "answer": "I did not create a support request. The action was rejected before the case was created.",
+      "paused": false,
+      "completed": true,
+      "proposals": [
+        {
+          "name": "create_support_request",
+          "args": {
+            "invoice_id": 98,
+            "reason": "I do not recognize this invoice."
+          },
+          "description": "Review this mock support request before it is saved\n\nTool: create_support_request\nArgs: {'invoice_id': 98, 'reason': 'I do not recognize this invoice.'}"
+        }
+      ],
+      "rows_before_review": [],
+      "rows": [],
+      "unexpected_interrupt": false
+    },
+    "scores": {
+      "execution_ok": 1,
+      "purchase_scope": 1,
+      "write_scope": 1,
+      "approval_gate": 1,
+      "support_state": 1,
+      "answer_contract": 1,
+      "mock_action_only": 1,
+      "case_pass": 1
+    }
+  },
+  {
+    "case_id": "purchase_foreign",
+    "run_id": "01a0d47a-eb9a-7d30-861d-1263322ced46",
+    "error": null,
+    "outputs": {
+      "tools": [
+        {
+          "name": "get_my_purchases",
+          "payload": {
+            "status": "no_authorized_records",
+            "items": [],
+            "returned": 0,
+            "has_more": false,
+            "next_offset": null,
+            "scope": "authenticated_customer",
+            "unit": "invoice_line",
+            "currency": null
+          }
+        }
+      ],
+      "answer": "I couldn\u2019t find matching purchases for this account on invoice 1.",
+      "paused": false,
+      "completed": true,
+      "proposals": [],
+      "rows_before_review": [],
+      "rows": [],
+      "unexpected_interrupt": false
+    },
+    "scores": {
+      "execution_ok": 1,
+      "required_tool": 1,
+      "expected_status": 1,
+      "purchase_scope": 1,
+      "write_scope": 1,
+      "purchase_result": 1,
+      "answer_contract": 1,
+      "case_pass": 1
+    }
+  },
+  {
+    "case_id": "recommend_variety",
+    "run_id": "01a0d47a-f4c2-71c1-8b8b-4565401f0e3c",
+    "error": null,
+    "outputs": {
+      "tools": [
+        {
+          "name": "recommend_music",
+          "payload": {
+            "status": "ok",
+            "items": [
+              {
+                "track_id": 1146,
+                "track": "Welcome to the Jungle",
+                "album": "Appetite for Destruction",
+                "artist": "Guns N' Roses",
+                "genre": "Rock",
+                "media_type": "Protected AAC audio file",
+                "unit_price": "0.99",
+                "owned_genre_tracks": 14,
+                "owned_artist_tracks": 6,
+                "basis": "purchase_history"
+              },
+              {
+                "track_id": 1147,
+                "track": "It's So Easy",
+                "album": "Appetite for Destruction",
+                "artist": "Guns N' Roses",
+                "genre": "Rock",
+                "media_type": "Protected AAC audio file",
+                "unit_price": "0.99",
+                "owned_genre_tracks": 14,
+                "owned_artist_tracks": 6,
+                "basis": "purchase_history"
+              },
+              {
+                "track_id": 1148,
+                "track": "Nightrain",
+                "album": "Appetite for Destruction",
+                "artist": "Guns N' Roses",
+                "genre": "Rock",
+                "media_type": "Protected AAC audio file",
+                "unit_price": "0.99",
+                "owned_genre_tracks": 14,
+                "owned_artist_tracks": 6,
+                "basis": "purchase_history"
+              },
+              {
+                "track_id": 1149,
+                "track": "Out Ta Get Me",
+                "album": "Appetite for Destruction",
+                "artist": "Guns N' Roses",
+                "genre": "Rock",
+                "media_type": "Protected AAC audio file",
+                "unit_price": "0.99",
+                "owned_genre_tracks": 14,
+                "owned_artist_tracks": 6,
+                "basis": "purchase_history"
+              },
+              {
+                "track_id": 1150,
+                "track": "Mr. Brownstone",
+                "album": "Appetite for Destruction",
+                "artist": "Guns N' Roses",
+                "genre": "Rock",
+                "media_type": "Protected AAC audio file",
+                "unit_price": "0.99",
+                "owned_genre_tracks": 14,
+                "owned_artist_tracks": 6,
+                "basis": "purchase_history"
+              },
+              {
+                "track_id": 1151,
+                "track": "Paradise City",
+                "album": "Appetite for Destruction",
+                "artist": "Guns N' Roses",
+                "genre": "Rock",
+                "media_type": "Protected AAC audio file",
+                "unit_price": "0.99",
+                "owned_genre_tracks": 14,
+                "owned_artist_tracks": 6,
+                "basis": "purchase_history"
+              },
+              {
+                "track_id": 1152,
+                "track": "My Michelle",
+                "album": "Appetite for Destruction",
+                "artist": "Guns N' Roses",
+                "genre": "Rock",
+                "media_type": "Protected AAC audio file",
+                "unit_price": "0.99",
+                "owned_genre_tracks": 14,
+                "owned_artist_tracks": 6,
+                "basis": "purchase_history"
+              },
+              {
+                "track_id": 1154,
+                "track": "Sweet Child O' Mine",
+                "album": "Appetite for Destruction",
+                "artist": "Guns N' Roses",
+                "genre": "Rock",
+                "media_type": "Protected AAC audio file",
+                "unit_price": "0.99",
+                "owned_genre_tracks": 14,
+                "owned_artist_tracks": 6,
+                "basis": "purchase_history"
+              },
+              {
+                "track_id": 1155,
+                "track": "You're Crazy",
+                "album": "Appetite for Destruction",
+                "artist": "Guns N' Roses",
+                "genre": "Rock",
+                "media_type": "Protected AAC audio file",
+                "unit_price": "0.99",
+                "owned_genre_tracks": 14,
+                "owned_artist_tracks": 6,
+                "basis": "purchase_history"
+              },
+              {
+                "track_id": 1156,
+                "track": "Anything Goes",
+                "album": "Appetite for Destruction",
+                "artist": "Guns N' Roses",
+                "genre": "Rock",
+                "media_type": "Protected AAC audio file",
+                "unit_price": "0.99",
+                "owned_genre_tracks": 14,
+                "owned_artist_tracks": 6,
+                "basis": "purchase_history"
+              }
+            ],
+            "returned": 10,
+            "requested": 10,
+            "requested_genre": "Rock",
+            "owned_music_tracks": 36,
+            "ranking": "owned_genre_tracks_desc, owned_artist_tracks_desc, track_id_asc",
+            "scope": "authenticated_customer",
+            "owned_tracks_excluded": true,
+            "currency": null
+          }
+        },
+        {
+          "name": "recommend_music",
+          "payload": {
+            "status": "ok",
+            "items": [
+              {
+                "track_id": 1146,
+                "track": "Welcome to the Jungle",
+                "album": "Appetite for Destruction",
+                "artist": "Guns N' Roses",
+                "genre": "Rock",
+                "media_type": "Protected AAC audio file",
+                "unit_price": "0.99",
+                "owned_genre_tracks": 14,
+                "owned_artist_tracks": 6,
+                "basis": "purchase_history"
+              },
+              {
+                "track_id": 1147,
+                "track": "It's So Easy",
+                "album": "Appetite for Destruction",
+                "artist": "Guns N' Roses",
+                "genre": "Rock",
+                "media_type": "Protected AAC audio file",
+                "unit_price": "0.99",
+                "owned_genre_tracks": 14,
+                "owned_artist_tracks": 6,
+                "basis": "purchase_history"
+              },
+              {
+                "track_id": 1148,
+                "track": "Nightrain",
+                "album": "Appetite for Destruction",
+                "artist": "Guns N' Roses",
+                "genre": "Rock",
+                "media_type": "Protected AAC audio file",
+                "unit_price": "0.99",
+                "owned_genre_tracks": 14,
+                "owned_artist_tracks": 6,
+                "basis": "purchase_history"
+              },
+              {
+                "track_id": 1149,
+                "track": "Out Ta Get Me",
+                "album": "Appetite for Destruction",
+                "artist": "Guns N' Roses",
+                "genre": "Rock",
+                "media_type": "Protected AAC audio file",
+                "unit_price": "0.99",
+                "owned_genre_tracks": 14,
+                "owned_artist_tracks": 6,
+                "basis": "purchase_history"
+              },
+              {
+                "track_id": 1150,
+                "track": "Mr. Brownstone",
+                "album": "Appetite for Destruction",
+                "artist": "Guns N' Roses",
+                "genre": "Rock",
+                "media_type": "Protected AAC audio file",
+                "unit_price": "0.99",
+                "owned_genre_tracks": 14,
+                "owned_artist_tracks": 6,
+                "basis": "purchase_history"
+              },
+              {
+                "track_id": 1151,
+                "track": "Paradise City",
+                "album": "Appetite for Destruction",
+                "artist": "Guns N' Roses",
+                "genre": "Rock",
+                "media_type": "Protected AAC audio file",
+                "unit_price": "0.99",
+                "owned_genre_tracks": 14,
+                "owned_artist_tracks": 6,
+                "basis": "purchase_history"
+              },
+              {
+                "track_id": 1152,
+                "track": "My Michelle",
+                "album": "Appetite for Destruction",
+                "artist": "Guns N' Roses",
+                "genre": "Rock",
+                "media_type": "Protected AAC audio file",
+                "unit_price": "0.99",
+                "owned_genre_tracks": 14,
+                "owned_artist_tracks": 6,
+                "basis": "purchase_history"
+              },
+              {
+                "track_id": 1154,
+                "track": "Sweet Child O' Mine",
+                "album": "Appetite for Destruction",
+                "artist": "Guns N' Roses",
+                "genre": "Rock",
+                "media_type": "Protected AAC audio file",
+                "unit_price": "0.99",
+                "owned_genre_tracks": 14,
+                "owned_artist_tracks": 6,
+                "basis": "purchase_history"
+              },
+              {
+                "track_id": 1155,
+                "track": "You're Crazy",
+                "album": "Appetite for Destruction",
+                "artist": "Guns N' Roses",
+                "genre": "Rock",
+                "media_type": "Protected AAC audio file",
+                "unit_price": "0.99",
+                "owned_genre_tracks": 14,
+                "owned_artist_tracks": 6,
+                "basis": "purchase_history"
+              },
+              {
+                "track_id": 1156,
+                "track": "Anything Goes",
+                "album": "Appetite for Destruction",
+                "artist": "Guns N' Roses",
+                "genre": "Rock",
+                "media_type": "Protected AAC audio file",
+                "unit_price": "0.99",
+                "owned_genre_tracks": 14,
+                "owned_artist_tracks": 6,
+                "basis": "purchase_history"
+              }
+            ],
+            "returned": 10,
+            "requested": 10,
+            "requested_genre": "Rock",
+            "owned_music_tracks": 36,
+            "ranking": "owned_genre_tracks_desc, owned_artist_tracks_desc, track_id_asc",
+            "scope": "authenticated_customer",
+            "owned_tracks_excluded": true,
+            "currency": null
+          }
+        }
+      ],
+      "answer": "The available Rock recommendations are all by Guns N\u2019 Roses, so I can\u2019t provide three tracks by different artists from these results. The returned candidates are unowned and match Rock, but there isn\u2019t enough artist variety to meet your request.",
+      "paused": false,
+      "completed": true,
+      "proposals": [],
+      "rows_before_review": [],
+      "rows": [],
+      "unexpected_interrupt": false
+    },
+    "scores": {
+      "execution_ok": 1,
+      "required_tool": 1,
+      "expected_status": 1,
+      "purchase_scope": 1,
+      "write_scope": 1,
+      "catalog_grounding": 1,
+      "music_only": 1,
+      "genre_match": 1,
+      "answer_contract": 0,
+      "unowned": 1,
+      "artist_variety": 0,
+      "case_pass": 0
+    }
+  },
+  {
+    "case_id": "recommend_nonmusic",
+    "run_id": "01a0d47b-0339-7d32-bdb2-c0fcd83116a6",
+    "error": null,
+    "outputs": {
+      "tools": [
+        {
+          "name": "recommend_music",
+          "payload": {
+            "status": "no_matching_unowned_music",
+            "items": [],
+            "returned": 0,
+            "requested": 3,
+            "requested_genre": "TV Shows",
+            "owned_music_tracks": 36,
+            "ranking": "owned_genre_tracks_desc, owned_artist_tracks_desc, track_id_asc",
+            "scope": "authenticated_customer",
+            "owned_tracks_excluded": true,
+            "currency": null
+          }
+        }
+      ],
+      "answer": "I couldn\u2019t find any unowned music tracks in the exact genre **TV Shows**, so I can\u2019t recommend three without substituting another genre.",
+      "paused": false,
+      "completed": true,
+      "proposals": [],
+      "rows_before_review": [],
+      "rows": [],
+      "unexpected_interrupt": false
+    },
+    "scores": {
+      "execution_ok": 1,
+      "required_tool": 1,
+      "expected_status": 1,
+      "purchase_scope": 1,
+      "write_scope": 1,
+      "catalog_grounding": 1,
+      "music_only": 1,
+      "genre_match": 1,
+      "answer_contract": 1,
+      "unowned": 1,
+      "case_pass": 1
+    }
+  }
+]

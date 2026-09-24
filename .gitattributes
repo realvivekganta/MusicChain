@@ -1,0 +1,4 @@
+# Preserve the vendored SQL bytes used by checksum verification.
+src/data/Chinook_Sqlite.sql -text -whitespace
+src/data/CHINOOK_LICENSE.md -whitespace
+*.zip binary

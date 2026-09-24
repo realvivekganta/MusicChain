@@ -1,0 +1,124 @@
+{
+  "label": "artist-variety",
+  "started_at": "20260924T173957Z",
+  "status": "completed",
+  "model": "openai:gpt-6-luna",
+  "model_configuration": "See source snapshot agent.py; other defaults are provider-owned",
+  "python": "3.12.8",
+  "repetitions": 2,
+  "case_count": 15,
+  "cases_sha256": "59fde1c8b3d5ce95e297949fe4eb6a0b6803f2e844429b469403716a7ee638c5",
+  "evaluators_sha256": "a8c705a59bb8a718d9415713af55e42cad4daa489e479f1d3ae6d6a12b42b363",
+  "database_sha256": "9bd892696e956e57c8cfabd90fcf1675d583ba8e961e968ec53c8da7c08c2669",
+  "source_hashes": {
+    "app.py": "af692d64392f109b731c5cb60942d6e39dfccb358c551672c11b06c45d81c21e",
+    "pyproject.toml": "f07089b71209346ec01d2af34d9efc682088d38a5096a75769a10101a25e889a",
+    "requirements.lock": "17ea52ab0ef6a50c704fd1fffc55fdeb3fcc32e2f37a7a446d9c23c4023e877b",
+    "src/agent/__init__.py": "8d773b95426cfbd11492a591cafcca9a7db5a41588c5a948dc8fed2c1c1f95f7",
+    "src/agent/agent.py": "38142845e9e3369eb194c2fedf079dbf6db57c22780d81f4d91868bcee9efb34",
+    "src/agent/context.py": "448b575c3ad84ad31f361e3a4227a52d52b74e2c75ee2fa8e726da104664aedf",
+    "src/agent/database.py": "e42fb28f6b7c538543cc2355afcf9c762bf437ea8c02441b15719e52e89f23b4",
+    "src/agent/support_store.py": "3e78603a8c2a895eb95301aada234cd1e9954460d1e0d153dafa60843c5b56ab",
+    "src/agent/system_prompt.py": "083b47555a447ca2801540def6f96e4fac9a86ec9860d0f2230f1c0efedafb28",
+    "src/agent/tools.py": "7fac6bfbcbc409e50c37f1e85f4f8d0560d55ecfd71d20203553a1141e32cbd8",
+    "src/evals/__init__.py": "5b8aa9f1a4c8323b1479a8d6704672586b0543d00514dbf108bbafdf6d34bd34",
+    "src/evals/evaluators.py": "a8c705a59bb8a718d9415713af55e42cad4daa489e479f1d3ae6d6a12b42b363",
+    "src/evals/runner.py": "056d24f6a6ef0a1c74b637ec79bd8d24f050ed134a4b6a73ee99009ea6c65935",
+    "src/scripts/__init__.py": "f123e2860b4a25b4fa83af01f52822cd5b528973dc4b76f72df0b11bc7ac19d9",
+    "src/scripts/build_database.py": "f60ec7f86e7cb9d3a1590b176ce8e7055b37f9819e99de6d34af530b79321c33",
+    "src/scripts/verify_live.py": "4c6d1eeef598d8ae7c6c3de2cc71fc310665c995c7903652f6b7d536406ea91d",
+    "tests/conftest.py": "ac2ade655bb30a9b5be506e01c39ad4b5977304381eea611577fba4b16ee67a1",
+    "tests/test_agent.py": "5d831dd10ee1c0179ee03ab0d89b52b7b3f0d77cbb4e9209c5bfe6b060747487",
+    "tests/test_discovery.py": "b1f108193461ef9defe1b45511c29489ef1de92241ebe721a1a8bc20d797d7ca",
+    "tests/test_evaluators.py": "0dd4e206aefc965699146ed777cd51a4ff26aabd12dcfaa07f0dbd998769859e",
+    "tests/test_purchases.py": "32bcfa4c37db672fa0d5e210198bf3a804f01383aa4b902c561949421b41c064",
+    "tests/test_support.py": "afa1b709d16e88ae396168171722a980761f140f547bb0cbff505b135c8d1d26",
+    "src/data/Chinook_Sqlite.sql": "caf31d698a4a79c628215b552dfe6575e71be052ae02b8f18e763498f55f5d44",
+    "src/data/source.json": "d40df3cfa4f192abcad859f940d9f7ce59a5ba5d9e6f6e7c5aba7979a462f68b",
+    "src/data/CHINOOK_LICENSE.md": "5064d720db431474b0a0b0cef9d2b5e362b6c6f80602b35c6443b07cbc979f77",
+    "src/data/eval_cases.json": "59fde1c8b3d5ce95e297949fe4eb6a0b6803f2e844429b469403716a7ee638c5"
+  },
+  "versions": {
+    "langchain": "1.4.2",
+    "langgraph": "1.2.12",
+    "langsmith": "0.14.0"
+  },
+  "dataset_id": "c7b3b648-0ab9-45a8-aca9-80f196c7573a",
+  "dataset_name": "chinook-phase4-59fde1c8b3d5",
+  "dataset_version": "2026-09-24 17:32:19.420863+00:00",
+  "experiment_id": "096157df-6a2c-4bbe-8310-2fb005bac817",
+  "experiment_name": "phase4-artist-variety-ee0a74f9",
+  "url": "https://smith.langchain.com/o/5f568ee9-1df1-4bb1-b236-8b92e9002c82/datasets/c7b3b648-0ab9-45a8-aca9-80f196c7573a/compare?selectedSessions=096157df-6a2c-4bbe-8310-2fb005bac817",
+  "completed_at": "2026-09-24T17:41:01.942812+00:00",
+  "summary": {
+    "answer_contract": {
+      "passed": 30,
+      "evaluated": 30
+    },
+    "approval_gate": {
+      "passed": 10,
+      "evaluated": 10
+    },
+    "artist_variety": {
+      "passed": 2,
+      "evaluated": 2
+    },
+    "case_pass": {
+      "passed": 30,
+      "evaluated": 30
+    },
+    "catalog_grounding": {
+      "passed": 12,
+      "evaluated": 12
+    },
+    "execution_ok": {
+      "passed": 30,
+      "evaluated": 30
+    },
+    "expected_catalog": {
+      "passed": 4,
+      "evaluated": 4
+    },
+    "expected_status": {
+      "passed": 24,
+      "evaluated": 24
+    },
+    "genre_match": {
+      "passed": 12,
+      "evaluated": 12
+    },
+    "mock_action_only": {
+      "passed": 10,
+      "evaluated": 10
+    },
+    "music_only": {
+      "passed": 12,
+      "evaluated": 12
+    },
+    "purchase_result": {
+      "passed": 8,
+      "evaluated": 8
+    },
+    "purchase_scope": {
+      "passed": 30,
+      "evaluated": 30
+    },
+    "required_tool": {
+      "passed": 24,
+      "evaluated": 24
+    },
+    "support_state": {
+      "passed": 10,
+      "evaluated": 10
+    },
+    "unowned": {
+      "passed": 8,
+      "evaluated": 8
+    },
+    "write_scope": {
+      "passed": 30,
+      "evaluated": 30
+    }
+  },
+  "run_errors": 0
+}
